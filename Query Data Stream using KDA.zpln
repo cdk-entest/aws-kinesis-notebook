@@ -1,0 +1,615 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md \nGenerate Data Using Python SDK",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-18T07:49:18+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>Generate Data Using Python SDK</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689666209468_1218274108",
+      "id": "paragraph_1689666209468_1218274108",
+      "dateCreated": "2023-07-18T07:43:29+0000",
+      "dateStarted": "2023-07-18T07:49:18+0000",
+      "dateFinished": "2023-07-18T07:49:18+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:9641"
+    },
+    {
+      "text": "%flink.ipyflink\nimport datetime\nimport json\nimport random\nimport boto3\nimport time \n\n\nSTREAM_NAME = \"input-stream\"\nREGION = \"ap-southeast-1\"\n\n\ndef get_data():\n    return {\n        'event_time': datetime.datetime.now().isoformat(),\n        'ticker': random.choice([\"BTC\",\"ETH\",\"BNB\", \"XRP\", \"DOGE\"]),\n        'price': round(random.random() * 100, 2)}\n\n\ndef generate(stream_name, kinesis_client):\n    while True:\n        data = get_data()\n        print(data)\n        kinesis_client.put_record(\n            StreamName=stream_name,\n            Data=json.dumps(data),\n            PartitionKey=\"partitionkey\")\n        time.sleep(1)\n\n\nif __name__ == '__main__':\n    generate(STREAM_NAME, boto3.client('kinesis', region_name=REGION))",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-18T08:08:26+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689666098871_1686955018",
+      "id": "paragraph_1689666098871_1686955018",
+      "dateCreated": "2023-07-18T07:41:38+0000",
+      "dateStarted": "2023-07-18T08:08:04+0000",
+      "dateFinished": "2023-07-18T08:06:52+0000",
+      "status": "RUNNING",
+      "$$hashKey": "object:9642"
+    },
+    {
+      "text": "%md\n## Create a In-Memory Table",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-18T07:44:17+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Create a In-Memory Table</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689666164351_1299629146",
+      "id": "paragraph_1689666164351_1299629146",
+      "dateCreated": "2023-07-18T07:42:44+0000",
+      "dateStarted": "2023-07-18T07:44:17+0000",
+      "dateFinished": "2023-07-18T07:44:17+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:9643"
+    },
+    {
+      "text": "%flink.pyflink\nst_env.execute_sql(\"\"\"DROP TABLE IF EXISTS stock_table\"\"\")\nst_env.execute_sql(\"\"\"DROP TABLE IF EXISTS output_table\"\"\")",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-18T08:07:40+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "<pyflink.table.table_result.TableResult at 0x7fcb966dbc10>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689666340925_262994735",
+      "id": "paragraph_1689666340925_262994735",
+      "dateCreated": "2023-07-18T07:45:40+0000",
+      "dateStarted": "2023-07-18T08:07:40+0000",
+      "dateFinished": "2023-07-18T08:07:42+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:9644"
+    },
+    {
+      "text": "%flink.pyflink\nst_env.execute_sql(\"\"\"\nCREATE TABLE stock_table (\n                ticker VARCHAR(6),\n                price DOUBLE,\n                event_time TIMESTAMP(3),\n                WATERMARK FOR event_time AS event_time - INTERVAL '5' SECOND\n\n              )\n              PARTITIONED BY (ticker)\n              WITH (\n                'connector' = 'kinesis',\n                'stream' = 'input-stream',\n                'aws.region' = 'ap-southeast-1',\n                'scan.stream.initpos' = 'LATEST',\n                'format' = 'json',\n                'json.timestamp-format.standard' = 'ISO-8601'\n              ) \"\"\")\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-18T08:07:43+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "<pyflink.table.table_result.TableResult at 0x7fcb961474d0>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689666257098_1985790858",
+      "id": "paragraph_1689666257098_1985790858",
+      "dateCreated": "2023-07-18T07:44:17+0000",
+      "dateStarted": "2023-07-18T08:07:43+0000",
+      "dateFinished": "2023-07-18T08:07:45+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:9645"
+    },
+    {
+      "text": "%flink.ssql(type=update)\nselect * from stock_table ",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-18T08:07:51+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "ticker": "string",
+                      "price": "string",
+                      "event_time": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "msg": [
+          {
+            "data": "ticker\tprice\tevent_time\nBNB\t7.6\t2023-07-18 08:08:09.500915\nBNB\t93.61\t2023-07-18 08:08:13.537814\nBNB\t16.9\t2023-07-18 08:08:21.616769\nBNB\t5.57\t2023-07-18 08:08:31.707496\nBNB\t32.49\t2023-07-18 08:08:34.732322\nBNB\t98.53\t2023-07-18 08:08:39.777637\nBNB\t98.17\t2023-07-18 08:08:47.85521\nBNB\t9.51\t2023-07-18 08:08:52.901151\nBNB\t11.58\t2023-07-18 08:08:57.958074\nBNB\t31.38\t2023-07-18 08:09:01.996472\nBNB\t92.05\t2023-07-18 08:09:04.055593\nBNB\t91.3\t2023-07-18 08:09:07.089274\nBNB\t66.74\t2023-07-18 08:09:09.110057\nBNB\t0.68\t2023-07-18 08:09:11.127617\nBNB\t59.85\t2023-07-18 08:09:18.190706\nBNB\t86.88\t2023-07-18 08:09:22.225582\nBNB\t73.33\t2023-07-18 08:09:47.496996\nBTC\t75.68\t2023-07-18 08:08:07.484366\nBTC\t83.4\t2023-07-18 08:08:18.586078\nBTC\t25.51\t2023-07-18 08:08:22.626065\nBTC\t92.99\t2023-07-18 08:08:33.724698\nBTC\t54.82\t2023-07-18 08:08:53.909427\nBTC\t53.15\t2023-07-18 08:08:54.932201\nBTC\t28.79\t2023-07-18 08:09:10.118241\nBTC\t59.69\t2023-07-18 08:09:12.13734\nBTC\t83.33\t2023-07-18 08:09:17.182705\nBTC\t44.69\t2023-07-18 08:09:20.20715\nBTC\t1.85\t2023-07-18 08:09:23.234061\nBTC\t35.95\t2023-07-18 08:09:30.299951\nBTC\t58.05\t2023-07-18 08:09:32.318062\nBTC\t80.34\t2023-07-18 08:09:39.423841\nBTC\t79.84\t2023-07-18 08:09:41.442611\nBTC\t92.38\t2023-07-18 08:09:46.487839\nBTC\t6.8\t2023-07-18 08:09:52.542977\nDOGE\t94.44\t2023-07-18 08:08:08.492926\nDOGE\t45.79\t2023-07-18 08:08:11.518077\nDOGE\t83.88\t2023-07-18 08:08:14.54763\nDOGE\t60.88\t2023-07-18 08:08:23.635883\nDOGE\t69.96\t2023-07-18 08:08:30.698071\nDOGE\t56.68\t2023-07-18 08:08:40.787683\nDOGE\t4.91\t2023-07-18 08:08:43.818696\nDOGE\t86.49\t2023-07-18 08:08:50.883416\nDOGE\t13.65\t2023-07-18 08:08:55.940134\nDOGE\t86.16\t2023-07-18 08:08:58.967829\nDOGE\t30.12\t2023-07-18 08:08:59.976406\nDOGE\t25.31\t2023-07-18 08:09:16.174065\nDOGE\t55.53\t2023-07-18 08:09:21.21647\nDOGE\t6.08\t2023-07-18 08:09:24.246645\nDOGE\t45.1\t2023-07-18 08:09:29.290828\nDOGE\t94.15\t2023-07-18 08:09:35.345367\nDOGE\t77.82\t2023-07-18 08:09:36.39531\nDOGE\t80.04\t2023-07-18 08:09:37.403897\nDOGE\t77.4\t2023-07-18 08:09:40.433711\nDOGE\t57.45\t2023-07-18 08:09:42.451651\nDOGE\t49.64\t2023-07-18 08:09:43.460867\nDOGE\t71.99\t2023-07-18 08:09:44.47063\nDOGE\t26.32\t2023-07-18 08:09:51.534435\nDOGE\t6.41\t2023-07-18 08:09:53.551568\nETH\t18.55\t2023-07-18 08:08:06.423789\nETH\t36.02\t2023-07-18 08:08:12.528806\nETH\t86.36\t2023-07-18 08:08:15.559976\nETH\t51.3\t2023-07-18 08:08:16.567917\nETH\t1.75\t2023-07-18 08:08:19.595766\nETH\t72.52\t2023-07-18 08:08:20.605687\nETH\t22.26\t2023-07-18 08:08:25.654056\nETH\t25.65\t2023-07-18 08:08:26.662944\nETH\t70.68\t2023-07-18 08:08:29.688748\nETH\t28.34\t2023-07-18 08:08:32.716399\nETH\t73.19\t2023-07-18 08:08:35.741707\nETH\t51.17\t2023-07-18 08:08:36.750071\nETH\t84.71\t2023-07-18 08:08:37.760641\nETH\t49.73\t2023-07-18 08:08:38.768742\nETH\t9.4\t2023-07-18 08:08:45.837874\nETH\t61.52\t2023-07-18 08:09:03.006289\nETH\t14.86\t2023-07-18 08:09:08.101703\nETH\t80.89\t2023-07-18 08:09:13.145688\nETH\t25.87\t2023-07-18 08:09:15.164806\nETH\t8.54\t2023-07-18 08:09:19.198851\nETH\t63.17\t2023-07-18 08:09:27.273402\nETH\t2.74\t2023-07-18 08:09:28.282072\nETH\t33.21\t2023-07-18 08:09:31.309861\nETH\t8.83\t2023-07-18 08:09:33.326905\nETH\t77.02\t2023-07-18 08:09:38.414529\nETH\t74.31\t2023-07-18 08:09:49.515842\nXRP\t93.91\t2023-07-18 08:08:10.509999\nXRP\t9.71\t2023-07-18 08:08:17.577276\nXRP\t70.45\t2023-07-18 08:08:24.645618\nXRP\t51.72\t2023-07-18 08:08:27.670959\nXRP\t54.03\t2023-07-18 08:08:28.679519\nXRP\t43.6\t2023-07-18 08:08:41.7961\nXRP\t95.31\t2023-07-18 08:08:42.806077\nXRP\t23.64\t2023-07-18 08:08:44.828147\nXRP\t78.02\t2023-07-18 08:08:46.8463\nXRP\t60.85\t2023-07-18 08:08:48.862724\nXRP\t17.23\t2023-07-18 08:08:49.871491\nXRP\t1.71\t2023-07-18 08:08:51.892554\nXRP\t67.94\t2023-07-18 08:08:56.948146\nXRP\t76.57\t2023-07-18 08:09:00.986011\nXRP\t35.61\t2023-07-18 08:09:05.072088\nXRP\t46.31\t2023-07-18 08:09:06.080906\nXRP\t30.44\t2023-07-18 08:09:14.155446\nXRP\t80.47\t2023-07-18 08:09:25.256064\nXRP\t74.36\t2023-07-18 08:09:26.264811\nXRP\t61.5\t2023-07-18 08:09:34.337498\nXRP\t1.6\t2023-07-18 08:09:45.47807\nXRP\t84.15\t2023-07-18 08:09:48.50657\nXRP\t95.22\t2023-07-18 08:09:50.526055\n",
+            "type": "TABLE"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "/flinkdashboard/#/job/56a4a4ca4dc0fdcfcaf9b224fefbad4f",
+              "$$hashKey": "object:14623"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689666354011_355476943",
+      "id": "paragraph_1689666354011_355476943",
+      "dateCreated": "2023-07-18T07:45:54+0000",
+      "dateStarted": "2023-07-18T08:07:51+0000",
+      "dateFinished": "2023-07-18T08:05:05+0000",
+      "status": "RUNNING",
+      "$$hashKey": "object:9646"
+    },
+    {
+      "text": "%md \n## Enable Checkpointing",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-18T07:54:47+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689666833645_1325240911",
+      "id": "paragraph_1689666833645_1325240911",
+      "dateCreated": "2023-07-18T07:53:53+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:12227",
+      "dateFinished": "2023-07-18T07:54:47+0000",
+      "dateStarted": "2023-07-18T07:54:47+0000",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Enable Checkpointing</h2>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%flink.pyflink\nst_env.get_config().get_configuration().set_string(\n    \"execution.checkpointing.interval\", \"1min\"\n)\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-18T08:07:54+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689666411338_470157078",
+      "id": "paragraph_1689666411338_470157078",
+      "dateCreated": "2023-07-18T07:46:51+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:9647",
+      "dateFinished": "2023-07-18T08:07:54+0000",
+      "dateStarted": "2023-07-18T08:07:54+0000",
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      }
+    },
+    {
+      "text": "%md \n\n## Writing Results to Amazon S3",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-18T07:55:20+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689666895919_1381888408",
+      "id": "paragraph_1689666895919_1381888408",
+      "dateCreated": "2023-07-18T07:54:55+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:12314",
+      "dateFinished": "2023-07-18T07:55:20+0000",
+      "dateStarted": "2023-07-18T07:55:20+0000",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Writing Results to Amazon S3</h2>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%flink.pyflink\n\ntable_name = \"output_table\"\nbucket_name = \"data-lake-demo-17072023\"\n\nst_env.execute_sql(\"\"\"CREATE TABLE {0} (\n                ticker VARCHAR(6),\n                price DOUBLE,\n                event_time TIMESTAMP(3)\n              )\n              PARTITIONED BY (ticker)\n              WITH (\n                  'connector'='filesystem',\n                  'path'='s3a://{1}/',\n                  'format'='csv',\n                  'sink.partition-commit.policy.kind'='success-file',\n                  'sink.partition-commit.delay' = '1 min'\n              )\"\"\".format(\n        table_name, bucket_name))",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-18T08:07:56+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689666920528_2143389908",
+      "id": "paragraph_1689666920528_2143389908",
+      "dateCreated": "2023-07-18T07:55:20+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:12398",
+      "dateFinished": "2023-07-18T08:07:57+0000",
+      "dateStarted": "2023-07-18T08:07:56+0000",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "<pyflink.table.table_result.TableResult at 0x7fcb9613b190>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%flink.pyflink\ntable_result = st_env.execute_sql(\"INSERT INTO {0} SELECT * FROM {1}\".format(\"output_table\", \"stock_table\"))",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-18T08:07:59+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "/flinkdashboard/#/job/b20520a44b7ad676417b78f70fcd57f9",
+              "$$hashKey": "object:14752"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689666974653_186417174",
+      "id": "paragraph_1689666974653_186417174",
+      "dateCreated": "2023-07-18T07:56:14+0000",
+      "status": "RUNNING",
+      "focus": true,
+      "$$hashKey": "object:12482",
+      "dateFinished": "2023-07-18T08:07:13+0000",
+      "dateStarted": "2023-07-18T08:07:59+0000",
+      "results": {
+        "msg": [
+          {
+            "data": "",
+            "type": "TEXT"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%flink.pyflink\nprint(table_result.get_job_client().cancel())",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-18T08:02:11+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689667027070_64041482",
+      "id": "paragraph_1689667027070_64041482",
+      "dateCreated": "2023-07-18T07:57:07+0000",
+      "status": "ERROR",
+      "focus": true,
+      "$$hashKey": "object:12602",
+      "dateFinished": "2023-07-18T08:02:41+0000",
+      "dateStarted": "2023-07-18T08:02:11+0000",
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m\n\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)\n\u001b[0;32m<ipython-input-78-75dd014dd0c0>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtable_result\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mget_job_client\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mcancel\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\n\u001b[0;31mNameError\u001b[0m: name 'table_result' is not defined"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%flink.pyflink\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-18T08:02:11+0000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689667331275_90229363",
+      "id": "paragraph_1689667331275_90229363",
+      "dateCreated": "2023-07-18T08:02:11+0000",
+      "status": "READY",
+      "focus": true,
+      "$$hashKey": "object:12719"
+    }
+  ],
+  "name": "Query Data Stream using KDA",
+  "id": "2J69BPFFS",
+  "defaultInterpreterGroup": "flink",
+  "version": "0.9.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Query Data Stream using KDA"
+}

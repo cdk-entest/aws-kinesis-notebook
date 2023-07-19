@@ -34,6 +34,32 @@ aws kinesis register-stream-consumer \
 --consumer-name HelloConsumer
 ```
 
+## Conda Environment
+
+First download miniconda from [here](https://repo.anaconda.com/miniconda/Miniconda3-py39_23.5.2-0-Linux-x86_64.sh), then install miniconda
+
+```bash
+bash Miniconda3-latest-Linux-x86_64.sh
+```
+
+Create environment
+
+```bash
+conda create -n my-new-environment pip python=3.8
+```
+
+List environment
+
+```bash
+conda infor --envs
+```
+
+Activate environment
+
+```bash
+conda activate my-new-environment
+```
+
 ## Reference
 
 - [query with kda](https://aws.amazon.com/blogs/big-data/query-your-data-streams-interactively-using-kinesis-data-analytics-studio-and-python/)

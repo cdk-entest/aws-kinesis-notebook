@@ -44,4 +44,6 @@ aws kinesis register-stream-consumer \
 
 - [apache flink window](https://flink.apache.org/2015/12/04/introducing-stream-windows-in-apache-flink/)
 
-[apache flink connector and checkpoint](https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/table/filesystem/)
+- [apache flink connector and checkpoint](https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/table/filesystem/)
+
+- [kineis shard limit](https://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html)

@@ -26,6 +26,14 @@ aws kinesis get-records \
     --shard-iterator AAAAAAAAAAGQSzIrfkjBufIU6bUR0UXRSoPbPPp0TWaau6wKZgoFArI+lFmGXr3Z2myZwGqUmD/3sWjUXSTYvVCv+dFfu+06g/C0Jmbnzno0FuNI9a2rK+OFTYH0+61fa6efOR4xv3XdVbrzNwT1dJXV4/BGvz0x2GtOh4Go6EUbwcgpL5xdkzjkaT+sg2kBwnfjxTSFkPP/mp7ZkSyc3rU6EOLhLoG1q+CZZJfGX2Oi1ZayHMqcBQ==
 ```
 
+Enhanced Fan-Out
+
+```bash
+aws kinesis register-stream-consumer \
+--stream-arn arn:aws:kinesis:ap-southeast-1:681505416554:stream/taxi-stream \
+--consumer-name HelloConsumer
+```
+
 ## Reference
 
 - [query with kda](https://aws.amazon.com/blogs/big-data/query-your-data-streams-interactively-using-kinesis-data-analytics-studio-and-python/)
@@ -35,3 +43,5 @@ aws kinesis get-records \
 - [apache flink timely stream processing](https://nightlies.apache.org/flink/flink-docs-release-1.14/docs/concepts/time/)
 
 - [apache flink window](https://flink.apache.org/2015/12/04/introducing-stream-windows-in-apache-flink/)
+
+[apache flink connector and checkpoint](https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/table/filesystem/)

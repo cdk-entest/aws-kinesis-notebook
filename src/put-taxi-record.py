@@ -58,8 +58,10 @@ while True:
 	tripDuration=random.randint(8, 10000)
 	googleDistance=gcDistance
 	googleDuration=tripDuration
+	event_time = datetime.datetime.now().isoformat()
 	
 	new_dict={}
+	new_dict["event_time"] = event_time
 	new_dict["id"]=id
 	new_dict["vendorId"]=vendorId
 	new_dict["pickupDate"]=pickupDate
@@ -78,5 +80,5 @@ while True:
 	response=clientkinesis.put_record(StreamName=kdsname, Data=json.dumps(new_dict), PartitionKey=id)
 	print("Total ingested:"+str(i) +",ReqID:"+ response['ResponseMetadata']['RequestId'] + ",HTTPStatusCode:"+ str(response['ResponseMetadata']['HTTPStatusCode']))
 
-	# time.sleep(1)
+	time.sleep(1)
 

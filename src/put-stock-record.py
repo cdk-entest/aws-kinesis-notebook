@@ -32,13 +32,13 @@ def get_data():
 def generate(stream_name, kinesis_client):
     i = 0
     while True:
-        data = get_data_sin(i)
+        data = get_data()
         print(data)
         kinesis_client.put_record(
             StreamName=stream_name,
             Data=json.dumps(data),
             PartitionKey="partitionkey")
-        time.sleep(1)
+        # time.sleep(1)
         i = i + 1
 
 

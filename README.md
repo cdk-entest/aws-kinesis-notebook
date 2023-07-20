@@ -67,6 +67,80 @@ Activate environment
 conda activate my-new-environment
 ```
 
+## Develop Notebook
+
+- create source table
+- do some transformation
+- create sink table
+
+First, let create a table
+
+```sql
+CREATE TABLE stock_table (
+  ticker VARCHAR(6),
+  price DOUBLE,
+  event_time TIMESTAMP(3),
+  WATERMARK FOR event_time AS event_time - INTERVAL '5' SECOND)
+  PARTITIONED BY (ticker)
+WITH (
+  'connector' = 'kinesis',
+  'stream' = 'stock-input-stream',
+  'aws.region' = 'ap-southeast-1',
+  'scan.stream.initpos' = 'LATEST',
+  'format' = 'json',
+  'json.timestamp-format.standard' = 'ISO-8601'
+) """)
+```
+
+Seccond, please pay attention to the watermakr as it is required for windowing and action [here](). Let use a tumbling window to calculate average stock price over each 10 second window
+
+```sql
+%flink.ssql(type=update)
+SELECT
+        stock_table.ticker as ticker,
+        AVG(stock_table.price) AS avg_price,
+        TUMBLE_ROWTIME(stock_table.event_time, INTERVAL '10' second) as time_event
+FROM stock_table
+GROUP BY TUMBLE(stock_table.event_time, INTERVAL '10' second), stock_table.ticker;
+```
+
+Third, let use slidding window to calcualte average price over a window width of 1 minute and update each 10 seconds
+
+```sql
+SELECT
+        stock_table.ticker as ticker,
+        AVG(stock_table.price) AS avg_price,
+        HOP_ROWTIME(stock_table.event_time, INTERVAL '10' second, INTERVAL '1' minute) as hop_time
+FROM stock_table
+GROUP BY HOP(stock_table.event_time, INTERVAL '10' second, INTERVAL '1' minute), stock_table.ticker;
+```
+
+Finally, let create a sink table to write data to s3. Before that we need to enable checkpointing each minute
+
+```py
+%flink.pyflink
+st_env.get_config().get_configuration().set_string(
+    "execution.checkpointing.interval", "1min"
+)
+```
+
+Then create a sink table for writting to s3
+
+```sql
+CREATE TABLE stock_output_table(
+  ticker VARCHAR(6),
+  price DOUBLE,
+  event_time TIMESTAMP(3))
+  PARTITIONED BY (ticker)
+  WITH (
+  'connector'='filesystem',
+  'path'='s3a://{1}/',
+  'format'='csv',
+  'sink.partition-commit.policy.kind'='success-file',
+  'sink.partition-commit.delay' = '1 min'
+  )
+```
+
 ## Develop App
 
 - project structure

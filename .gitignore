@@ -1,3 +1,4 @@
 .env
 kinesis-producer-library-examples-master
 test
+**.jar

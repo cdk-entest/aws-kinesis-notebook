@@ -7,8 +7,8 @@ import time
 import math
 
 
-STREAM_NAME = "input-stream"
-REGION = "ap-southeast-1"
+STREAM_NAME = "sensor-input-stream"
+REGION = "us-east-1"
 
 def get_data_sin(i):
     i = int(math.remainder(i, 4))

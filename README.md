@@ -10,6 +10,51 @@ date: 17/07/2023
 
 This [GitHub]() shows
 
+- kinesis cli and producer
+- develop with kinesis studio zeppeline notebook
+- develop and deploy kda app
+- some key concepts of data streaming with flink
+
+## Develop App
+
+Follow this [docs](https://docs.aws.amazon.com/kinesisanalytics/latest/java/examples-python-s3.html) to create configuration for the app
+
+```json
+[
+  {
+    "PropertyGroupId": "consumer.config.0",
+    "PropertyMap": {
+      "input.stream.name": "stock-input-stream",
+      "aws.region": "ap-southeast-1",
+      "scan.stream.initpos": "LATEST"
+    }
+  },
+  {
+    "PropertyGroupId": "kinesis.analytics.flink.run.options",
+    "PropertyMap": {
+      "python": "streaming-file-sink.py",
+      "jarfile": "flink-sql-connector-kinesis-1.15.2.jar"
+    }
+  },
+  {
+    "PropertyGroupId": "sink.config.0",
+    "PropertyMap": {
+      "output.bucket.name": "data-lake-demo-17072023"
+    }
+  },
+  {
+    "PropertyGroupId": "producer.config.0",
+    "PropertyMap": {
+      "output.stream.name": "stock-output-stream",
+      "shard.count": "1",
+      "aws.region": "ap-southeast-1"
+    }
+  }
+]
+```
+
+## Kinesis CLI
+
 aws kinesis get-shard-iterator --shard-id shardId-000000000000 --shard-iterator-type TRIM_HORIZON
 
 ```bash
@@ -36,7 +81,7 @@ aws kinesis register-stream-consumer \
 
 ## Conda Environment
 
-First download miniconda from [here](https://repo.anaconda.com/miniconda/Miniconda3-py39_23.5.2-0-Linux-x86_64.sh), then install miniconda
+First download miniconda from [here]https://repo.anaconda.com/miniconda/Miniconda3-py39_23.5.2-0-Linux-x86_64.sh, then install miniconda
 
 ```bash
 bash Miniconda3-latest-Linux-x86_64.sh
@@ -75,3 +120,13 @@ conda activate my-new-environment
 - [kineis shard limit](https://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html)
 
 - [kinesis flink query](https://aws.amazon.com/blogs/big-data/top-10-flink-sql-queries-to-try-in-amazon-kinesis-data-analytics-studio/)
+
+- [kinesis flink write to s3 docs](https://docs.aws.amazon.com/kinesisanalytics/latest/java/examples-python-s3.html)
+
+- [flink window](https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/windows/)
+
+- [flink event time and watermark](https://nightlies.apache.org/flink/flink-docs-master/docs/concepts/time/#event-time-and-watermarks)
+
+- [flink event and watermak 1](https://www.youtube.com/watch?v=QVDJFZVHZ3c)
+
+- [flink event and watermak 2](https://www.youtube.com/watch?v=sdhwpUAjqaI&list=LL&index=3)

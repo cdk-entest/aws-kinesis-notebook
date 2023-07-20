@@ -4,7 +4,8 @@ import random
 import boto3
 import time 
 
-STREAM_NAME = "sensor-stream"
+STREAM_NAME = "sensor-input-stream"
+REGION = "us-east-1"
 
 
 def get_random_data():
@@ -33,9 +34,9 @@ def send_data(stream_name, kinesis_client):
             Data=json.dumps(data),
             PartitionKey=partition_key)
         # 
-        # time.sleep(1)
+        time.sleep(1)
 
 
 if __name__ == '__main__':
-    kinesis_client = boto3.client('kinesis')
+    kinesis_client = boto3.client('kinesis', region_name=REGION)
     send_data(STREAM_NAME, kinesis_client)

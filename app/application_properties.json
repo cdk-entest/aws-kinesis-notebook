@@ -1,0 +1,23 @@
+[
+  {
+    "PropertyGroupId": "kinesis.analytics.flink.run.options",
+    "PropertyMap": {
+      "python": "streaming-file-sink.py",
+      "jarfile": "flink-sql-connector-kinesis-1.15.2.jar"
+    }
+  },
+  {
+    "PropertyGroupId": "consumer.config.0",
+    "PropertyMap": {
+      "input.stream.name": "stock-input-stream",
+      "scan.stream.initpos": "LATEST",
+      "aws.region": "ap-southeast-1"
+    }
+  },
+  {
+    "PropertyGroupId": "sink.config.0",
+    "PropertyMap": {
+      "output.bucket.name": "data-lake-demo-17072023"
+    }
+  }
+]

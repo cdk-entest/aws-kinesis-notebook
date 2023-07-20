@@ -17,6 +17,20 @@ This [GitHub]() shows
 
 ## Develop App
 
+- project structure
+- configuration
+- iam role
+- tumbling window
+
+Project structure
+
+```
+|--app
+   |--application_properties.json
+   |--streaming-file-sink.py
+   |--deploy.sh
+```
+
 Follow this [docs](https://docs.aws.amazon.com/kinesisanalytics/latest/java/examples-python-s3.html) to create configuration for the app
 
 ```json
@@ -51,6 +65,95 @@ Follow this [docs](https://docs.aws.amazon.com/kinesisanalytics/latest/java/exam
     }
   }
 ]
+```
+
+Let double check the iam role attached to the flink job. Here is trusted policy
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "kinesisanalytics.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+```
+
+Permissions for demo purpose
+
+```
+CloudWatchFullAccess
+CloudWatchLogsFullAccess
+AmazonKinesisFullAccess
+AmazonS3FullAccess
+```
+
+Finally here is the logical code for sink table writting to S3
+
+```py
+def create_sink_table(table_name, bucket_name):
+    return """ CREATE TABLE {0} (
+                ticker VARCHAR(6),
+                price DOUBLE,
+                event_time TIMESTAMP(3)
+              )
+              PARTITIONED BY (ticker)
+              WITH (
+                  'connector'='filesystem',
+                  'path'='s3a://{1}/',
+                  'format'='json',
+                  'sink.partition-commit.policy.kind'='success-file',
+                  'sink.partition-commit.delay' = '1 min'
+              ) """.format(table_name, bucket_name)
+
+```
+
+Insert to the sink table
+
+```py
+table_result = table_env.execute_sql(
+    "INSERT INTO {0} SELECT * FROM {1}"
+    .format(output_table_name, input_table_name))
+```
+
+Simple put data to the stock-input-stream to test output in s3
+
+```py
+import datetime
+import json
+import random
+import boto3
+import time
+
+STREAM_NAME = "stock-input-stream"
+REGION = "ap-southeast-1"
+
+
+def get_data():
+    return {
+        'event_time': datetime.datetime.now().isoformat(),
+        'ticker': random.choice(['AAPL', 'AMZN', 'MSFT', 'INTC', 'TBV']),
+        'price': round(random.random() * 100, 2)	}
+
+
+def generate(stream_name, kinesis_client):
+    while True:
+        data = get_data()
+        print(data)
+        kinesis_client.put_record(
+            StreamName=stream_name,
+            Data=json.dumps(data),
+            PartitionKey="partitionkey")
+        time.sleep(1)
+
+
+if __name__ == '__main__':
+    generate(STREAM_NAME, boto3.client('kinesis', region_name = REGION))
 ```
 
 ## Kinesis CLI

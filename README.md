@@ -156,6 +156,88 @@ print(table_result.get_job_client().cancel())
 
 ## Deploy Notebook
 
+Please remove all select operator. First, create variables
+
+```py
+%flink.pyflink
+input_table_name = "stock_input_table"
+output_table_name = "stock_output_table"
+bucket_name = "data-lake-demo-17072023"
+region = "ap-southeast-1"
+input_stream_name = "stock-input-stream"
+prefix = "stock-data"
+```
+
+Then create a source table
+
+```py
+%flink.pyflink
+st_env.execute_sql("""
+CREATE TABLE {0}
+(
+  ticker VARCHAR(6),
+  price DOUBLE,
+  event_time TIMESTAMP(3),
+  WATERMARK FOR event_time AS event_time - INTERVAL '5' SECOND
+)
+PARTITIONED BY (ticker)
+WITH (
+  'connector' = 'kinesis',
+  'stream' = '{1}',
+  'aws.region' = '{2}',
+  'scan.stream.initpos' = 'LATEST',
+  'format' = 'json',
+  'json.timestamp-format.standard' = 'ISO-8601'
+) """.format(input_table_name, input_stream_name, region)
+)
+
+```
+
+Setup the checkpoint 1 minute
+
+```py
+%flink.pyflink
+st_env.get_config().get_configuration().set_string(
+    "execution.checkpointing.interval", "1min"
+)
+
+```
+
+Create a sink table
+
+```py
+%flink.pyflink
+st_env.execute_sql("""
+CREATE TABLE {0}
+(
+  ticker VARCHAR(6),
+  price DOUBLE,
+  event_time TIMESTAMP(3)
+)
+PARTITIONED BY (ticker)
+WITH (
+    'connector'='filesystem',
+    'path'='s3a://{1}/{2}/',
+    'format'='csv',
+    'sink.partition-commit.policy.kind'='success-file',
+    'sink.partition-commit.delay' = '1 min'
+)""".format(output_table_name, bucket_name, prefix)
+)
+```
+
+Insert data into sink table
+
+```py
+%flink.pyflink
+table_result = st_env.execute_sql("INSERT INTO {0} SELECT * FROM {1}".format(output_table_name, input_table_name))
+```
+
+Cancel the job in notebook in case
+
+```py
+table_result.get_job_client().cancel()
+```
+
 ## Develop App
 
 - project structure

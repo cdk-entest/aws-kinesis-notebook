@@ -8,12 +8,64 @@ date: 17/07/2023
 
 ## Introduction
 
-This [GitHub]() shows
+This [GitHub](https://github.com/cdk-entest/aws-kinesis-notebook/tree/master) shows
 
 - kinesis cli and producer
 - develop with kinesis studio zeppeline notebook
 - develop and deploy kda app
 - some key concepts of data streaming with flink
+
+## Kinesis CLI
+
+aws kinesis get-shard-iterator --shard-id shardId-000000000000 --shard-iterator-type TRIM_HORIZON
+
+```bash
+aws kinesis get-shard-iterator \
+    --stream-name input-stream \
+    --shard-id shardId-000000000001 \
+    --shard-iterator-type LATEST
+```
+
+Get Records
+
+```bash
+aws kinesis get-records \
+    --shard-iterator AAAAAAAAAAGQSzIrfkjBufIU6bUR0UXRSoPbPPp0TWaau6wKZgoFArI+lFmGXr3Z2myZwGqUmD/3sWjUXSTYvVCv+dFfu+06g/C0Jmbnzno0FuNI9a2rK+OFTYH0+61fa6efOR4xv3XdVbrzNwT1dJXV4/BGvz0x2GtOh4Go6EUbwcgpL5xdkzjkaT+sg2kBwnfjxTSFkPP/mp7ZkSyc3rU6EOLhLoG1q+CZZJfGX2Oi1ZayHMqcBQ==
+```
+
+Enhanced Fan-Out
+
+```bash
+aws kinesis register-stream-consumer \
+--stream-arn arn:aws:kinesis:ap-southeast-1:681505416554:stream/taxi-stream \
+--consumer-name HelloConsumer
+```
+
+## Conda Environment
+
+First download miniconda from [here]https://repo.anaconda.com/miniconda/Miniconda3-py39_23.5.2-0-Linux-x86_64.sh, then install miniconda
+
+```bash
+bash Miniconda3-latest-Linux-x86_64.sh
+```
+
+Create environment
+
+```bash
+conda create -n my-new-environment pip python=3.8
+```
+
+List environment
+
+```bash
+conda infor --envs
+```
+
+Activate environment
+
+```bash
+conda activate my-new-environment
+```
 
 ## Develop App
 
@@ -154,58 +206,6 @@ def generate(stream_name, kinesis_client):
 
 if __name__ == '__main__':
     generate(STREAM_NAME, boto3.client('kinesis', region_name = REGION))
-```
-
-## Kinesis CLI
-
-aws kinesis get-shard-iterator --shard-id shardId-000000000000 --shard-iterator-type TRIM_HORIZON
-
-```bash
-aws kinesis get-shard-iterator \
-    --stream-name input-stream \
-    --shard-id shardId-000000000001 \
-    --shard-iterator-type LATEST
-```
-
-Get Records
-
-```bash
-aws kinesis get-records \
-    --shard-iterator AAAAAAAAAAGQSzIrfkjBufIU6bUR0UXRSoPbPPp0TWaau6wKZgoFArI+lFmGXr3Z2myZwGqUmD/3sWjUXSTYvVCv+dFfu+06g/C0Jmbnzno0FuNI9a2rK+OFTYH0+61fa6efOR4xv3XdVbrzNwT1dJXV4/BGvz0x2GtOh4Go6EUbwcgpL5xdkzjkaT+sg2kBwnfjxTSFkPP/mp7ZkSyc3rU6EOLhLoG1q+CZZJfGX2Oi1ZayHMqcBQ==
-```
-
-Enhanced Fan-Out
-
-```bash
-aws kinesis register-stream-consumer \
---stream-arn arn:aws:kinesis:ap-southeast-1:681505416554:stream/taxi-stream \
---consumer-name HelloConsumer
-```
-
-## Conda Environment
-
-First download miniconda from [here]https://repo.anaconda.com/miniconda/Miniconda3-py39_23.5.2-0-Linux-x86_64.sh, then install miniconda
-
-```bash
-bash Miniconda3-latest-Linux-x86_64.sh
-```
-
-Create environment
-
-```bash
-conda create -n my-new-environment pip python=3.8
-```
-
-List environment
-
-```bash
-conda infor --envs
-```
-
-Activate environment
-
-```bash
-conda activate my-new-environment
 ```
 
 ## Reference

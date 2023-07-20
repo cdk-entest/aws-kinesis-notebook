@@ -1,12 +1,12 @@
 ﻿{
   "paragraphs": [
     {
-      "text": "%md \nGenerate Data Using Python SDK",
+      "text": "%md \n## Generate Data Using Python SDK",
       "user": "anonymous",
-      "dateUpdated": "2023-07-18T09:59:06+0000",
+      "dateUpdated": "2023-07-20T03:24:54+0000",
       "progress": 0,
       "config": {
-        "tableHide": true,
+        "tableHide": false,
         "editorSetting": {
           "language": "markdown",
           "editOnDblClick": true,
@@ -29,26 +29,26 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<div class=\"markdown-body\">\n<p>Generate Data Using Python SDK</p>\n\n</div>"
+            "data": "<div class=\"markdown-body\">\n<h2>Generate Data Using Python SDK</h2>\n\n</div>"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689666209468_1218274108",
+      "jobName": "paragraph_1689823473190_814565156",
       "id": "paragraph_1689666209468_1218274108",
-      "dateCreated": "2023-07-18T07:43:29+0000",
-      "dateStarted": "2023-07-18T07:49:18+0000",
-      "dateFinished": "2023-07-18T07:49:18+0000",
+      "dateCreated": "2023-07-20T03:24:33+0000",
       "status": "FINISHED",
       "focus": true,
-      "$$hashKey": "object:6828"
+      "$$hashKey": "object:3678",
+      "dateFinished": "2023-07-20T03:24:54+0000",
+      "dateStarted": "2023-07-20T03:24:54+0000"
     },
     {
-      "text": "%flink.ipyflink\nimport datetime\nimport json\nimport random\nimport boto3\nimport time \n\n\nSTREAM_NAME = \"input-stream\"\nREGION = \"ap-southeast-1\"\n\n\ndef get_data():\n    return {\n        'event_time': datetime.datetime.now().isoformat(),\n        'ticker': random.choice([\"BTC\",\"ETH\",\"BNB\", \"XRP\", \"DOGE\"]),\n        'price': round(random.random() * 100, 2)}\n\n\ndef generate(stream_name, kinesis_client):\n    while True:\n        data = get_data()\n        print(data)\n        kinesis_client.put_record(\n            StreamName=stream_name,\n            Data=json.dumps(data),\n            PartitionKey=\"partitionkey\")\n        # time.sleep(1)\n\n\nif __name__ == '__main__':\n    generate(STREAM_NAME, boto3.client('kinesis', region_name=REGION))",
+      "text": "%flink.ipyflink\nimport datetime\nimport json\nimport random\nimport boto3\nimport time \n\n\nSTREAM_NAME = \"stock-input-stream\"\nREGION = \"ap-southeast-1\"\n\n\ndef get_data():\n    return {\n        'event_time': datetime.datetime.now().isoformat(),\n        'ticker': random.choice([\"BTC\",\"ETH\",\"BNB\", \"XRP\", \"DOGE\"]),\n        'price': round(random.random() * 100, 2)}\n\n\ndef generate(stream_name, kinesis_client):\n    while True:\n        data = get_data()\n        print(data)\n        kinesis_client.put_record(\n            StreamName=stream_name,\n            Data=json.dumps(data),\n            PartitionKey=\"partitionkey\")\n        # time.sleep(1)\n\n\nif __name__ == '__main__':\n    generate(STREAM_NAME, boto3.client('kinesis', region_name=REGION))",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T02:26:32+0000",
+      "dateUpdated": "2023-07-20T03:24:33+0000",
       "progress": 0,
       "config": {
         "tableHide": true,
@@ -84,18 +84,16 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689666098871_1686955018",
+      "jobName": "paragraph_1689823473196_1553848000",
       "id": "paragraph_1689666098871_1686955018",
-      "dateCreated": "2023-07-18T07:41:38+0000",
-      "dateStarted": "2023-07-18T11:19:18+0000",
-      "dateFinished": "2023-07-18T11:23:33+0000",
-      "status": "ABORT",
-      "$$hashKey": "object:6829"
+      "dateCreated": "2023-07-20T03:24:33+0000",
+      "status": "READY",
+      "$$hashKey": "object:3679"
     },
     {
       "text": "%md\n## Create a In-Memory Table",
       "user": "anonymous",
-      "dateUpdated": "2023-07-18T07:44:17+0000",
+      "dateUpdated": "2023-07-20T03:24:33+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -128,18 +126,16 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689666164351_1299629146",
+      "jobName": "paragraph_1689823473200_1128374847",
       "id": "paragraph_1689666164351_1299629146",
-      "dateCreated": "2023-07-18T07:42:44+0000",
-      "dateStarted": "2023-07-18T07:44:17+0000",
-      "dateFinished": "2023-07-18T07:44:17+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:6830"
+      "dateCreated": "2023-07-20T03:24:33+0000",
+      "status": "READY",
+      "$$hashKey": "object:3680"
     },
     {
       "text": "%flink.pyflink\nst_env.execute_sql(\"\"\"DROP TABLE IF EXISTS stock_table\"\"\")\nst_env.execute_sql(\"\"\"DROP TABLE IF EXISTS output_table\"\"\")",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T03:11:38+0000",
+      "dateUpdated": "2023-07-20T03:25:23+0000",
       "progress": 0,
       "config": {
         "tableHide": true,
@@ -164,25 +160,25 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "<pyflink.table.table_result.TableResult at 0x7fde0b4d7910>"
+            "data": "<pyflink.table.table_result.TableResult at 0x7f18b3437b50>"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689666340925_262994735",
+      "jobName": "paragraph_1689823473200_1128078626",
       "id": "paragraph_1689666340925_262994735",
-      "dateCreated": "2023-07-18T07:45:40+0000",
-      "dateStarted": "2023-07-19T03:11:38+0000",
-      "dateFinished": "2023-07-19T03:11:41+0000",
+      "dateCreated": "2023-07-20T03:24:33+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:6831"
+      "$$hashKey": "object:3681",
+      "dateFinished": "2023-07-20T03:26:09+0000",
+      "dateStarted": "2023-07-20T03:25:23+0000"
     },
     {
-      "text": "%flink.pyflink\nst_env.execute_sql(\"\"\"\nCREATE TABLE stock_table (\n                ticker VARCHAR(6),\n                price DOUBLE,\n                event_time TIMESTAMP(3),\n                WATERMARK FOR event_time AS event_time - INTERVAL '5' SECOND\n\n              )\n              PARTITIONED BY (ticker)\n              WITH (\n                'connector' = 'kinesis',\n                'stream' = 'input-stream',\n                'aws.region' = 'ap-southeast-1',\n                'scan.stream.initpos' = 'LATEST',\n                'format' = 'json',\n                'json.timestamp-format.standard' = 'ISO-8601'\n              ) \"\"\")\n",
+      "text": "%flink.pyflink\nst_env.execute_sql(\"\"\"\nCREATE TABLE stock_table (\n                ticker VARCHAR(6),\n                price DOUBLE,\n                event_time TIMESTAMP(3),\n                WATERMARK FOR event_time AS event_time - INTERVAL '5' SECOND\n\n              )\n              PARTITIONED BY (ticker)\n              WITH (\n                'connector' = 'kinesis',\n                'stream' = 'stock-input-stream',\n                'aws.region' = 'ap-southeast-1',\n                'scan.stream.initpos' = 'LATEST',\n                'format' = 'json',\n                'json.timestamp-format.standard' = 'ISO-8601'\n              ) \"\"\")\n",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T03:11:43+0000",
+      "dateUpdated": "2023-07-20T03:25:33+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -207,25 +203,70 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "<pyflink.table.table_result.TableResult at 0x7fde0b440f10>"
+            "data": "<pyflink.table.table_result.TableResult at 0x7f18b2eef7d0>"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689666257098_1985790858",
+      "jobName": "paragraph_1689823473200_1996540978",
       "id": "paragraph_1689666257098_1985790858",
-      "dateCreated": "2023-07-18T07:44:17+0000",
-      "dateStarted": "2023-07-19T03:11:43+0000",
-      "dateFinished": "2023-07-19T03:11:44+0000",
+      "dateCreated": "2023-07-20T03:24:33+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:6832"
+      "$$hashKey": "object:3682",
+      "dateFinished": "2023-07-20T03:26:11+0000",
+      "dateStarted": "2023-07-20T03:26:02+0000"
+    },
+    {
+      "text": "%md \n## Select and Filter \n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T03:30:27+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689823814888_1877586566",
+      "id": "paragraph_1689823814888_1877586566",
+      "dateCreated": "2023-07-20T03:30:14+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:9969",
+      "dateFinished": "2023-07-20T03:30:27+0000",
+      "dateStarted": "2023-07-20T03:30:27+0000",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Select and Filter</h2>\n\n</div>"
+          }
+        ]
+      }
     },
     {
       "text": "%flink.ssql(type=update)\nSELECT * FROM stock_table ",
       "user": "anonymous",
-      "dateUpdated": "2023-07-18T09:55:32+0000",
+      "dateUpdated": "2023-07-20T03:24:33+0000",
       "progress": 0,
       "config": {
         "tableHide": true,
@@ -293,34 +334,63 @@
         ]
       },
       "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "FLINK JOB",
-          "tooltip": "View in Flink web UI",
-          "group": "flink",
-          "values": [
-            {
-              "jobUrl": "/flinkdashboard/#/job/56a4a4ca4dc0fdcfcaf9b224fefbad4f",
-              "$$hashKey": "object:7630"
-            }
-          ],
-          "interpreterSettingId": "flink"
-        }
-      },
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689666354011_355476943",
+      "jobName": "paragraph_1689823473201_1884093309",
       "id": "paragraph_1689666354011_355476943",
-      "dateCreated": "2023-07-18T07:45:54+0000",
-      "dateStarted": "2023-07-18T08:07:51+0000",
-      "dateFinished": "2023-07-18T08:10:29+0000",
-      "status": "ERROR",
-      "$$hashKey": "object:6833"
+      "dateCreated": "2023-07-20T03:24:33+0000",
+      "status": "READY",
+      "$$hashKey": "object:3683"
+    },
+    {
+      "text": "%md\n## Tumbling Window\ncalculate average stock price group by ticker and window \n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T03:29:55+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689823601904_838364221",
+      "id": "paragraph_1689823601904_838364221",
+      "dateCreated": "2023-07-20T03:26:41+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:7316",
+      "dateFinished": "2023-07-20T03:29:55+0000",
+      "dateStarted": "2023-07-20T03:29:55+0000",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Tumbling Window</h2>\n<p>calculate average stock price group by ticker and window</p>\n\n</div>"
+          }
+        ]
+      }
     },
     {
       "text": "%flink.ssql(type=update)\nSELECT \n        stock_table.ticker as ticker,\n        AVG(stock_table.price) AS avg_price,\n        TUMBLE_ROWTIME(stock_table.event_time, INTERVAL '10' second) as time_event\nFROM stock_table\nGROUP BY TUMBLE(stock_table.event_time, INTERVAL '10' second), stock_table.ticker;",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T04:03:16+0000",
+      "dateUpdated": "2023-07-20T03:26:34+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -409,7 +479,7 @@
         "msg": [
           {
             "type": "TABLE",
-            "data": "ticker\tavg_price\ttime_event\nBNB\t53.868920454545446\t2023-07-19 03:52:49.999\nBNB\t49.436237623762395\t2023-07-19 03:52:59.999\nBNB\t53.43310160427807\t2023-07-19 03:53:09.999\nBNB\t51.788247422680435\t2023-07-19 03:53:19.999\nBNB\t49.818316831683155\t2023-07-19 03:53:29.999\nBNB\t46.397463414634146\t2023-07-19 03:53:39.999\nBNB\t56.34883248730964\t2023-07-19 03:53:49.999\nBNB\t47.25800000000002\t2023-07-19 03:53:59.999\nBNB\t48.98909999999998\t2023-07-19 03:54:09.999\nBNB\t52.20257575757573\t2023-07-19 03:54:19.999\nBNB\t46.99803030303034\t2023-07-19 03:54:29.999\nBNB\t49.005594059405965\t2023-07-19 03:54:39.999\nBNB\t48.32413636363634\t2023-07-19 03:54:49.999\nBNB\t51.78763285024153\t2023-07-19 03:54:59.999\nBNB\t49.40340909090908\t2023-07-19 03:55:09.999\nBNB\t50.34882978723401\t2023-07-19 03:55:19.999\nBNB\t54.935130434782664\t2023-07-19 03:55:29.999\nBNB\t51.86971563981043\t2023-07-19 03:55:39.999\nBNB\t48.255027027027026\t2023-07-19 03:55:49.999\nBNB\t51.067754010695175\t2023-07-19 03:55:59.999\nBNB\t51.006594594594624\t2023-07-19 03:56:09.999\nBNB\t51.1692307692308\t2023-07-19 03:56:19.999\nBNB\t49.05570048309178\t2023-07-19 03:56:29.999\nBNB\t53.313150000000036\t2023-07-19 03:56:39.999\nBNB\t51.580454545454536\t2023-07-19 03:56:49.999\nBNB\t48.261784037558684\t2023-07-19 03:56:59.999\nBNB\t50.462598870056475\t2023-07-19 03:57:09.999\nBNB\t51.08934782608696\t2023-07-19 03:57:19.999\nBNB\t52.76892473118278\t2023-07-19 03:57:29.999\nBNB\t51.56474860335194\t2023-07-19 03:57:39.999\nBNB\t48.687278106508884\t2023-07-19 03:57:49.999\nBNB\t54.12907608695656\t2023-07-19 03:57:59.999\nBNB\t51.53283422459896\t2023-07-19 03:58:09.999\nBNB\t51.34156424581006\t2023-07-19 03:58:19.999\nBNB\t52.580721153846156\t2023-07-19 03:58:29.999\nBNB\t48.93977578475337\t2023-07-19 03:58:39.999\nBNB\t53.228324022346364\t2023-07-19 03:58:49.999\nBNB\t48.28488636363636\t2023-07-19 03:58:59.999\nBNB\t50.73238888888892\t2023-07-19 03:59:09.999\nBNB\t53.96766990291264\t2023-07-19 03:59:19.999\nBNB\t48.611219512195134\t2023-07-19 03:59:29.999\nBNB\t49.20861702127657\t2023-07-19 03:59:39.999\nBNB\t50.12896551724137\t2023-07-19 03:59:49.999\nBNB\t48.57363157894733\t2023-07-19 03:59:59.999\nBNB\t54.95090909090913\t2023-07-19 04:00:09.999\nBNB\t50.16886904761906\t2023-07-19 04:00:19.999\nBNB\t51.776525821596245\t2023-07-19 04:00:29.999\nBNB\t48.07016304347823\t2023-07-19 04:00:39.999\nBNB\t48.527195767195764\t2023-07-19 04:00:49.999\nBNB\t49.26353741496598\t2023-07-19 04:00:59.999\nBNB\t48.615530726256964\t2023-07-19 04:01:09.999\nBNB\t47.94327586206896\t2023-07-19 04:01:19.999\nBNB\t49.615242718446616\t2023-07-19 04:01:29.999\nBNB\t48.17492063492063\t2023-07-19 04:01:39.999\nBNB\t50.7100921658986\t2023-07-19 04:01:49.999\nBNB\t51.00473988439306\t2023-07-19 04:01:59.999\nBNB\t52.94885869565218\t2023-07-19 04:02:09.999\nBNB\t51.20474489795919\t2023-07-19 04:02:19.999\nBNB\t45.03362162162163\t2023-07-19 04:02:29.999\nBNB\t53.040722222222215\t2023-07-19 04:02:39.999\nBNB\t50.932163742690065\t2023-07-19 04:02:49.999\nBTC\t50.76757062146894\t2023-07-19 03:52:49.999\nBTC\t47.80494897959183\t2023-07-19 03:52:59.999\nBTC\t48.20183673469386\t2023-07-19 03:53:09.999\nBTC\t49.03949771689496\t2023-07-19 03:53:19.999\nBTC\t52.008974358974356\t2023-07-19 03:53:29.999\nBTC\t44.21900552486187\t2023-07-19 03:53:39.999\nBTC\t49.432660098522156\t2023-07-19 03:53:49.999\nBTC\t49.0159296482412\t2023-07-19 03:53:59.999\nBTC\t53.31005347593585\t2023-07-19 03:54:09.999\nBTC\t49.05387434554974\t2023-07-19 03:54:19.999\nBTC\t49.303532608695676\t2023-07-19 03:54:29.999\nBTC\t46.56126903553296\t2023-07-19 03:54:39.999\nBTC\t51.608817204301054\t2023-07-19 03:54:49.999\nBTC\t47.86736842105267\t2023-07-19 03:54:59.999\nBTC\t49.51233830845767\t2023-07-19 03:55:09.999\nBTC\t48.16971014492754\t2023-07-19 03:55:19.999\nBTC\t56.1095744680851\t2023-07-19 03:55:29.999\nBTC\t47.991499999999995\t2023-07-19 03:55:39.999\nBTC\t49.628701923076896\t2023-07-19 03:55:49.999\nBTC\t52.44588832487308\t2023-07-19 03:55:59.999\nBTC\t51.95364705882352\t2023-07-19 03:56:09.999\nBTC\t54.13652631578952\t2023-07-19 03:56:19.999\nBTC\t50.102033898305095\t2023-07-19 03:56:29.999\nBTC\t47.51710784313728\t2023-07-19 03:56:39.999\nBTC\t50.86228395061727\t2023-07-19 03:56:49.999\nBTC\t47.63020618556698\t2023-07-19 03:56:59.999\nBTC\t51.7818994413408\t2023-07-19 03:57:09.999\nBTC\t49.54458333333336\t2023-07-19 03:57:19.999\nBTC\t49.290200000000034\t2023-07-19 03:57:29.999\nBTC\t53.35646739130434\t2023-07-19 03:57:39.999\nBTC\t47.223273809523796\t2023-07-19 03:57:49.999\nBTC\t47.11479532163741\t2023-07-19 03:57:59.999\nBTC\t48.45355932203389\t2023-07-19 03:58:09.999\nBTC\t49.77555555555558\t2023-07-19 03:58:19.999\nBTC\t51.71632183908046\t2023-07-19 03:58:29.999\nBTC\t47.888877551020435\t2023-07-19 03:58:39.999\nBTC\t48.861623376623406\t2023-07-19 03:58:49.999\nBTC\t54.49311224489795\t2023-07-19 03:58:59.999\nBTC\t44.68994285714284\t2023-07-19 03:59:09.999\nBTC\t49.2502162162162\t2023-07-19 03:59:19.999\nBTC\t47.790732984293214\t2023-07-19 03:59:29.999\nBTC\t51.736338797814206\t2023-07-19 03:59:39.999\nBTC\t47.63452631578948\t2023-07-19 03:59:49.999\nBTC\t48.990558375634485\t2023-07-19 03:59:59.999\nBTC\t46.63994382022471\t2023-07-19 04:00:09.999\nBTC\t51.36405128205127\t2023-07-19 04:00:19.999\nBTC\t51.04265000000001\t2023-07-19 04:00:29.999\nBTC\t46.79060773480665\t2023-07-19 04:00:39.999\nBTC\t47.18627551020412\t2023-07-19 04:00:49.999\nBTC\t45.81994623655915\t2023-07-19 04:00:59.999\nBTC\t50.48542168674699\t2023-07-19 04:01:09.999\nBTC\t49.00497326203209\t2023-07-19 04:01:19.999\nBTC\t54.09144385026736\t2023-07-19 04:01:29.999\nBTC\t50.447010869565226\t2023-07-19 04:01:39.999\nBTC\t48.055223880597005\t2023-07-19 04:01:49.999\nBTC\t48.63256281407037\t2023-07-19 04:01:59.999\nBTC\t49.063551401869155\t2023-07-19 04:02:09.999\nBTC\t51.22481927710841\t2023-07-19 04:02:19.999\nBTC\t48.87619565217395\t2023-07-19 04:02:29.999\nBTC\t49.573742331288344\t2023-07-19 04:02:39.999\nBTC\t52.22718592964824\t2023-07-19 04:02:49.999\nDOGE\t52.24497005988026\t2023-07-19 03:52:49.999\nDOGE\t51.59207729468597\t2023-07-19 03:52:59.999\nDOGE\t49.36477777777779\t2023-07-19 03:53:09.999\nDOGE\t50.67021978021979\t2023-07-19 03:53:19.999\nDOGE\t51.562613636363615\t2023-07-19 03:53:29.999\nDOGE\t48.35914438502674\t2023-07-19 03:53:39.999\nDOGE\t50.948499999999996\t2023-07-19 03:53:49.999\nDOGE\t52.94800925925927\t2023-07-19 03:53:59.999\nDOGE\t46.22523560209425\t2023-07-19 03:54:09.999\nDOGE\t46.795774647887306\t2023-07-19 03:54:19.999\nDOGE\t51.883133640552984\t2023-07-19 03:54:29.999\nDOGE\t49.182102564102536\t2023-07-19 03:54:39.999\nDOGE\t49.57554945054943\t2023-07-19 03:54:49.999\nDOGE\t48.410999999999994\t2023-07-19 03:54:59.999\nDOGE\t50.59116402116404\t2023-07-19 03:55:09.999\nDOGE\t52.39934065934064\t2023-07-19 03:55:19.999\nDOGE\t46.36309782608696\t2023-07-19 03:55:29.999\nDOGE\t50.36075892857144\t2023-07-19 03:55:39.999\nDOGE\t54.56767326732676\t2023-07-19 03:55:49.999\nDOGE\t50.86733668341706\t2023-07-19 03:55:59.999\nDOGE\t50.934705882352915\t2023-07-19 03:56:09.999\nDOGE\t52.84655172413789\t2023-07-19 03:56:19.999\nDOGE\t48.92396907216496\t2023-07-19 03:56:29.999\nDOGE\t47.27552238805966\t2023-07-19 03:56:39.999\nDOGE\t48.67668316831684\t2023-07-19 03:56:49.999\nDOGE\t53.0659649122807\t2023-07-19 03:56:59.999\nDOGE\t50.912279792746105\t2023-07-19 03:57:09.999\nDOGE\t53.51269662921349\t2023-07-19 03:57:19.999\nDOGE\t49.14433862433863\t2023-07-19 03:57:29.999\nDOGE\t50.50590361445783\t2023-07-19 03:57:39.999\nDOGE\t49.14875000000003\t2023-07-19 03:57:49.999\nDOGE\t51.121791044776124\t2023-07-19 03:57:59.999\nDOGE\t48.51356321839078\t2023-07-19 03:58:09.999\nDOGE\t49.1815\t2023-07-19 03:58:19.999\nDOGE\t46.89434999999999\t2023-07-19 03:58:29.999\nDOGE\t51.92194444444443\t2023-07-19 03:58:39.999\nDOGE\t47.239562841530066\t2023-07-19 03:58:49.999\nDOGE\t46.69455555555557\t2023-07-19 03:58:59.999\nDOGE\t55.75449074074075\t2023-07-19 03:59:09.999\nDOGE\t51.469375000000035\t2023-07-19 03:59:19.999\nDOGE\t48.20614035087719\t2023-07-19 03:59:29.999\nDOGE\t50.048010471204215\t2023-07-19 03:59:39.999\nDOGE\t50.89898989898986\t2023-07-19 03:59:49.999\nDOGE\t46.256904761904764\t2023-07-19 03:59:59.999\nDOGE\t48.946515151515186\t2023-07-19 04:00:09.999\nDOGE\t49.61186170212766\t2023-07-19 04:00:19.999\nDOGE\t46.10861111111113\t2023-07-19 04:00:29.999\nDOGE\t52.035567010309265\t2023-07-19 04:00:39.999\nDOGE\t48.1773157894737\t2023-07-19 04:00:49.999\nDOGE\t49.65521739130433\t2023-07-19 04:00:59.999\nDOGE\t52.3539705882353\t2023-07-19 04:01:09.999\nDOGE\t54.067664974619305\t2023-07-19 04:01:19.999\nDOGE\t50.04236994219655\t2023-07-19 04:01:29.999\nDOGE\t49.947354497354475\t2023-07-19 04:01:39.999\nDOGE\t49.82081632653061\t2023-07-19 04:01:49.999\nDOGE\t50.52707865168539\t2023-07-19 04:01:59.999\nDOGE\t48.36837209302327\t2023-07-19 04:02:09.999\nDOGE\t49.77519125683062\t2023-07-19 04:02:19.999\nDOGE\t51.73439790575915\t2023-07-19 04:02:29.999\nDOGE\t53.35833333333333\t2023-07-19 04:02:39.999\nDOGE\t47.52389423076923\t2023-07-19 04:02:49.999\nETH\t51.67113333333335\t2023-07-19 03:52:49.999\nETH\t50.17281407035176\t2023-07-19 03:52:59.999\nETH\t48.47377450980394\t2023-07-19 03:53:09.999\nETH\t48.47095000000001\t2023-07-19 03:53:19.999\nETH\t48.60324873096447\t2023-07-19 03:53:29.999\nETH\t48.46644808743168\t2023-07-19 03:53:39.999\nETH\t52.5656770833333\t2023-07-19 03:53:49.999\nETH\t46.62357487922708\t2023-07-19 03:53:59.999\nETH\t52.48715025906732\t2023-07-19 03:54:09.999\nETH\t53.91794444444445\t2023-07-19 03:54:19.999\nETH\t48.60937500000001\t2023-07-19 03:54:29.999\nETH\t48.370999999999995\t2023-07-19 03:54:39.999\nETH\t51.20972527472526\t2023-07-19 03:54:49.999\nETH\t49.40894736842107\t2023-07-19 03:54:59.999\nETH\t48.00848484848486\t2023-07-19 03:55:09.999\nETH\t48.289082125603876\t2023-07-19 03:55:19.999\nETH\t50.996601941747564\t2023-07-19 03:55:29.999\nETH\t49.67792079207922\t2023-07-19 03:55:39.999\nETH\t51.68078651685392\t2023-07-19 03:55:49.999\nETH\t52.992222222222246\t2023-07-19 03:55:59.999\nETH\t51.47836956521739\t2023-07-19 03:56:09.999\nETH\t46.18403225806451\t2023-07-19 03:56:19.999\nETH\t51.577549019607844\t2023-07-19 03:56:29.999\nETH\t47.0468253968254\t2023-07-19 03:56:39.999\nETH\t51.4050537634409\t2023-07-19 03:56:49.999\nETH\t53.16514285714285\t2023-07-19 03:56:59.999\nETH\t51.039465240641675\t2023-07-19 03:57:09.999\nETH\t49.68668292682927\t2023-07-19 03:57:19.999\nETH\t50.25198019801977\t2023-07-19 03:57:29.999\nETH\t46.70406091370562\t2023-07-19 03:57:39.999\nETH\t48.15345945945948\t2023-07-19 03:57:49.999\nETH\t47.28518918918919\t2023-07-19 03:57:59.999\nETH\t50.05882653061224\t2023-07-19 03:58:09.999\nETH\t51.61219626168222\t2023-07-19 03:58:19.999\nETH\t49.88142857142853\t2023-07-19 03:58:29.999\nETH\t50.021562499999966\t2023-07-19 03:58:39.999\nETH\t47.794292682926844\t2023-07-19 03:58:49.999\nETH\t51.19960199004974\t2023-07-19 03:58:59.999\nETH\t51.69486486486487\t2023-07-19 03:59:09.999\nETH\t48.51921052631578\t2023-07-19 03:59:19.999\nETH\t49.750055555555534\t2023-07-19 03:59:29.999\nETH\t50.17204188481675\t2023-07-19 03:59:39.999\nETH\t50.15106060606063\t2023-07-19 03:59:49.999\nETH\t57.28234374999996\t2023-07-19 03:59:59.999\nETH\t51.292894736842065\t2023-07-19 04:00:09.999\nETH\t50.560578947368384\t2023-07-19 04:00:19.999\nETH\t51.40005555555557\t2023-07-19 04:00:29.999\nETH\t48.572931034482764\t2023-07-19 04:00:39.999\nETH\t50.05236559139783\t2023-07-19 04:00:49.999\nETH\t49.280935960591144\t2023-07-19 04:00:59.999\nETH\t50.12352631578946\t2023-07-19 04:01:09.999\nETH\t48.233282051282025\t2023-07-19 04:01:19.999\nETH\t52.353124999999984\t2023-07-19 04:01:29.999\nETH\t51.73870967741935\t2023-07-19 04:01:39.999\nETH\t48.066480446927365\t2023-07-19 04:01:49.999\nETH\t48.05649746192891\t2023-07-19 04:01:59.999\nETH\t51.239177215189876\t2023-07-19 04:02:09.999\nETH\t51.94959390862945\t2023-07-19 04:02:19.999\nETH\t47.39067415730339\t2023-07-19 04:02:29.999\nETH\t52.29717948717951\t2023-07-19 04:02:39.999\nETH\t48.51944723618089\t2023-07-19 04:02:49.999\nXRP\t53.349944751381244\t2023-07-19 03:52:49.999\nXRP\t49.38417582417581\t2023-07-19 03:52:59.999\nXRP\t49.95628571428571\t2023-07-19 03:53:09.999\nXRP\t51.88682291666665\t2023-07-19 03:53:19.999\nXRP\t49.05074074074072\t2023-07-19 03:53:29.999\nXRP\t47.55413612565446\t2023-07-19 03:53:39.999\nXRP\t52.69821989528797\t2023-07-19 03:53:49.999\nXRP\t50.3949456521739\t2023-07-19 03:53:59.999\nXRP\t52.90551912568308\t2023-07-19 03:54:09.999\nXRP\t50.56234374999997\t2023-07-19 03:54:19.999\nXRP\t47.56490291262139\t2023-07-19 03:54:29.999\nXRP\t49.693919597989925\t2023-07-19 03:54:39.999\nXRP\t50.333592233009725\t2023-07-19 03:54:49.999\nXRP\t53.21877450980393\t2023-07-19 03:54:59.999\nXRP\t48.308095238095234\t2023-07-19 03:55:09.999\nXRP\t48.51540000000001\t2023-07-19 03:55:19.999\nXRP\t49.04699999999999\t2023-07-19 03:55:29.999\nXRP\t50.11281767955802\t2023-07-19 03:55:39.999\nXRP\t49.01171875\t2023-07-19 03:55:49.999\nXRP\t49.54913242009135\t2023-07-19 03:55:59.999\nXRP\t46.733679245283\t2023-07-19 03:56:09.999\nXRP\t46.96396226415093\t2023-07-19 03:56:19.999\nXRP\t52.66270935960594\t2023-07-19 03:56:29.999\nXRP\t52.41222222222222\t2023-07-19 03:56:39.999\nXRP\t49.0444897959184\t2023-07-19 03:56:49.999\nXRP\t49.23654639175256\t2023-07-19 03:56:59.999\nXRP\t49.380952380952394\t2023-07-19 03:57:09.999\nXRP\t48.071549999999995\t2023-07-19 03:57:19.999\nXRP\t52.421666666666674\t2023-07-19 03:57:29.999\nXRP\t51.07771929824562\t2023-07-19 03:57:39.999\nXRP\t48.85914141414139\t2023-07-19 03:57:49.999\nXRP\t50.97814070351761\t2023-07-19 03:57:59.999\nXRP\t49.26701421800953\t2023-07-19 03:58:09.999\nXRP\t46.51733990147783\t2023-07-19 03:58:19.999\nXRP\t49.12433333333334\t2023-07-19 03:58:29.999\nXRP\t52.256630434782636\t2023-07-19 03:58:39.999\nXRP\t52.91317307692308\t2023-07-19 03:58:49.999\nXRP\t53.004205128205136\t2023-07-19 03:58:59.999\nXRP\t48.201861702127616\t2023-07-19 03:59:09.999\nXRP\t53.255102040816354\t2023-07-19 03:59:19.999\nXRP\t50.77755319148935\t2023-07-19 03:59:29.999\nXRP\t48.844374999999985\t2023-07-19 03:59:39.999\nXRP\t51.32643243243244\t2023-07-19 03:59:49.999\nXRP\t48.0364171122995\t2023-07-19 03:59:59.999\nXRP\t51.809343434343425\t2023-07-19 04:00:09.999\nXRP\t48.83923469387757\t2023-07-19 04:00:19.999\nXRP\t50.69924731182796\t2023-07-19 04:00:29.999\nXRP\t49.21924731182795\t2023-07-19 04:00:39.999\nXRP\t51.25802030456851\t2023-07-19 04:00:49.999\nXRP\t49.806373056994836\t2023-07-19 04:00:59.999\nXRP\t52.29923913043478\t2023-07-19 04:01:09.999\nXRP\t48.811976744186055\t2023-07-19 04:01:19.999\nXRP\t50.614413407821225\t2023-07-19 04:01:29.999\nXRP\t54.93471204188482\t2023-07-19 04:01:39.999\nXRP\t46.16640625000002\t2023-07-19 04:01:49.999\nXRP\t44.157999999999994\t2023-07-19 04:01:59.999\nXRP\t50.11572916666665\t2023-07-19 04:02:09.999\nXRP\t48.56659793814435\t2023-07-19 04:02:19.999\nXRP\t51.06161764705887\t2023-07-19 04:02:29.999\nXRP\t47.531117021276586\t2023-07-19 04:02:39.999\nXRP\t51.50111111111109\t2023-07-19 04:02:49.999\n"
+            "data": "ticker\tavg_price\ttime_event\nBNB\t33.27333333333333\t2023-07-20 10:28:49.999\nBNB\t58.14\t2023-07-20 10:28:59.999\nBNB\t42.805\t2023-07-20 10:29:09.999\nBNB\t24.83666666666667\t2023-07-20 10:29:19.999\nBNB\t63.01666666666667\t2023-07-20 10:29:29.999\nBNB\t60.48\t2023-07-20 10:29:39.999\nBNB\t15.03\t2023-07-20 10:29:49.999\nBNB\t65.23333333333333\t2023-07-20 10:29:59.999\nBNB\t50.85\t2023-07-20 10:30:09.999\nBNB\t68.29666666666667\t2023-07-20 10:30:19.999\nBNB\t5.35\t2023-07-20 10:30:29.999\nBNB\t6.8999999999999995\t2023-07-20 10:30:49.999\nBNB\t51.31\t2023-07-20 10:30:59.999\nBTC\t3.26\t2023-07-20 10:28:59.999\nBTC\t75.30000000000001\t2023-07-20 10:29:09.999\nBTC\t35.980000000000004\t2023-07-20 10:29:19.999\nBTC\t7.18\t2023-07-20 10:29:29.999\nBTC\t37.74666666666667\t2023-07-20 10:29:39.999\nBTC\t83.63\t2023-07-20 10:29:49.999\nBTC\t55.04\t2023-07-20 10:30:09.999\nBTC\t3.08\t2023-07-20 10:30:19.999\nBTC\t68.62\t2023-07-20 10:30:29.999\nBTC\t48.26333333333333\t2023-07-20 10:30:39.999\nBTC\t77.205\t2023-07-20 10:30:49.999\nBTC\t62.791999999999994\t2023-07-20 10:30:59.999\nDOGE\t39.18\t2023-07-20 10:28:49.999\nDOGE\t60.99\t2023-07-20 10:28:59.999\nDOGE\t55.53666666666667\t2023-07-20 10:29:09.999\nDOGE\t35.54\t2023-07-20 10:29:19.999\nDOGE\t78.57\t2023-07-20 10:29:29.999\nDOGE\t27.643333333333334\t2023-07-20 10:29:39.999\nDOGE\t74.03\t2023-07-20 10:29:49.999\nDOGE\t12.34\t2023-07-20 10:29:59.999\nDOGE\t49.245\t2023-07-20 10:30:09.999\nDOGE\t56.28666666666666\t2023-07-20 10:30:19.999\nDOGE\t44.6\t2023-07-20 10:30:29.999\nDOGE\t34.79333333333333\t2023-07-20 10:30:39.999\nDOGE\t70.09\t2023-07-20 10:30:49.999\nETH\t11.78\t2023-07-20 10:28:49.999\nETH\t38.449999999999996\t2023-07-20 10:28:59.999\nETH\t63.745\t2023-07-20 10:29:09.999\nETH\t35.795\t2023-07-20 10:29:19.999\nETH\t91.65\t2023-07-20 10:29:29.999\nETH\t14.25\t2023-07-20 10:29:39.999\nETH\t37.66\t2023-07-20 10:29:49.999\nETH\t45.765\t2023-07-20 10:29:59.999\nETH\t64.49333333333334\t2023-07-20 10:30:09.999\nETH\t59.61\t2023-07-20 10:30:19.999\nETH\t43.86666666666667\t2023-07-20 10:30:29.999\nETH\t56.1425\t2023-07-20 10:30:39.999\nETH\t42.693333333333335\t2023-07-20 10:30:59.999\nXRP\t68.54\t2023-07-20 10:28:49.999\nXRP\t60.879999999999995\t2023-07-20 10:28:59.999\nXRP\t4.69\t2023-07-20 10:29:09.999\nXRP\t51.775000000000006\t2023-07-20 10:29:19.999\nXRP\t87.505\t2023-07-20 10:29:29.999\nXRP\t35.975\t2023-07-20 10:29:49.999\nXRP\t52.735\t2023-07-20 10:29:59.999\nXRP\t92.49\t2023-07-20 10:30:09.999\nXRP\t67.97\t2023-07-20 10:30:19.999\nXRP\t49.49666666666667\t2023-07-20 10:30:49.999\n"
           },
           {
             "type": "TEXT",
@@ -417,7 +487,7 @@
           },
           {
             "type": "ANGULAR",
-            "data": "<div class='container ng-scope' style='padding-left:0px;padding-right:0px;'>\n    <div class='panel panel-danger'>\n        <div class='panel-heading' ng-click='isOpen=!isOpen' ng-init='isOpen=false' style=\"cursor:pointer\">\n            <div class='plainTextContainer' style='font-weight:bolder'><i class=\"fa fa-caret-right fa-fw\" style=\"padding-right:7px;transition:all 0.3s;{{isOpen?'transform:rotate(90deg);transform-origin:25% 45%':''}}\"></i>RuntimeException: Retries exceeded for getRecords operation - all 3 retry attempts failed.</div>\n        </div>\n        <div class='panel-collapse' uib-collapse='!isOpen'>\n            <div class='text' style='max-height:300px;overflow:auto;padding:10px'>java.io.IOException: Fail to run stream sql job\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:172)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:105)\n\tat org.apache.zeppelin.flink.FlinkStreamSqlInterpreter.callInnerSelect(FlinkStreamSqlInterpreter.java:89)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callSelect(FlinkSqlInterrpeter.java:503)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callCommand(FlinkSqlInterrpeter.java:266)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.runSqlList(FlinkSqlInterrpeter.java:160)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.internalInterpret(FlinkSqlInterrpeter.java:112)\n\tat org.apache.zeppelin.interpreter.AbstractInterpreter.interpret(AbstractInterpreter.java:47)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:110)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:852)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:744)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler.lambda$runJobInScheduler$0(ParallelScheduler.java:46)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat java.base/java.lang.Thread.run(Thread.java:829)\nCaused by: java.util.concurrent.ExecutionException: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: 5f64bc44dc04bdd12207b352d30e1628)\n\tat java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)\n\tat java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1999)\n\tat org.apache.flink.streaming.api.environment.StreamExecutionEnvironment.execute(StreamExecutionEnvironment.java:1719)\n\tat org.apache.flink.table.planner.delegation.ExecutorBase.execute(ExecutorBase.java:52)\n\tat org.apache.flink.table.api.internal.TableEnvironmentImpl.execute(TableEnvironmentImpl.java:1214)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:161)\n\t... 16 more\nCaused by: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: 5f64bc44dc04bdd12207b352d30e1628)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$getJobExecutionResult$6(ClusterClientJobClientAdapter.java:116)\n\tat java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2073)\n\tat org.apache.flink.client.program.rest.RestClusterClient.lambda$pollResourceAsync$22(RestClusterClient.java:602)\n\tat java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:859)\n\tat java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:837)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2073)\n\tat org.apache.flink.runtime.concurrent.FutureUtils.lambda$retryOperationWithDelay$8(FutureUtils.java:309)\n\tat java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:859)\n\tat java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:837)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)\n\tat java.base/java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:1085)\n\tat java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:478)\n\t... 3 more\nCaused by: org.apache.flink.runtime.client.JobExecutionException: Job execution failed.\n\tat org.apache.flink.runtime.jobmaster.JobResult.toJobExecutionResult(JobResult.java:147)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$getJobExecutionResult$6(ClusterClientJobClientAdapter.java:114)\n\t... 18 more\nCaused by: org.apache.flink.runtime.JobException: Recovery is suppressed by NoRestartBackoffTimeStrategy\n\tat org.apache.flink.runtime.executiongraph.failover.flip1.ExecutionFailureHandler.handleFailure(ExecutionFailureHandler.java:116)\n\tat org.apache.flink.runtime.executiongraph.failover.flip1.ExecutionFailureHandler.getFailureHandlingResult(ExecutionFailureHandler.java:78)\n\tat org.apache.flink.runtime.scheduler.DefaultScheduler.handleTaskFailure(DefaultScheduler.java:198)\n\tat org.apache.flink.runtime.scheduler.DefaultScheduler.maybeHandleTaskFailure(DefaultScheduler.java:191)\n\tat org.apache.flink.runtime.scheduler.DefaultScheduler.updateTaskExecutionStateInternal(DefaultScheduler.java:185)\n\tat org.apache.flink.runtime.scheduler.SchedulerBase.updateTaskExecutionState(SchedulerBase.java:522)\n\tat org.apache.flink.runtime.jobmaster.JobMaster.updateTaskExecutionState(JobMaster.java:400)\n\tat jdk.internal.reflect.GeneratedMethodAccessor86.invoke(Unknown Source)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\n\tat org.apache.flink.runtime.rpc.akka.AkkaRpcActor.handleRpcInvocation(AkkaRpcActor.java:284)\n\tat org.apache.flink.runtime.rpc.akka.AkkaRpcActor.handleRpcMessage(AkkaRpcActor.java:199)\n\tat org.apache.flink.runtime.rpc.akka.FencedAkkaRpcActor.handleRpcMessage(FencedAkkaRpcActor.java:74)\n\tat org.apache.flink.runtime.rpc.akka.AkkaRpcActor.handleMessage(AkkaRpcActor.java:152)\n\tat akka.japi.pf.UnitCaseStatement.apply(CaseStatements.scala:26)\n\tat akka.japi.pf.UnitCaseStatement.apply(CaseStatements.scala:21)\n\tat scala.PartialFunction.applyOrElse(PartialFunction.scala:123)\n\tat scala.PartialFunction.applyOrElse$(PartialFunction.scala:122)\n\tat akka.japi.pf.UnitCaseStatement.applyOrElse(CaseStatements.scala:21)\n\tat scala.PartialFunction$OrElse.applyOrElse(PartialFunction.scala:171)\n\tat scala.PartialFunction$OrElse.applyOrElse(PartialFunction.scala:172)\n\tat scala.PartialFunction$OrElse.applyOrElse(PartialFunction.scala:172)\n\tat akka.actor.Actor.aroundReceive(Actor.scala:517)\n\tat akka.actor.Actor.aroundReceive$(Actor.scala:515)\n\tat akka.actor.AbstractActor.aroundReceive(AbstractActor.scala:225)\n\tat akka.actor.ActorCell.receiveMessage(ActorCell.scala:592)\n\tat akka.actor.ActorCell.invoke(ActorCell.scala:561)\n\tat akka.dispatch.Mailbox.processMailbox(Mailbox.scala:258)\n\tat akka.dispatch.Mailbox.run(Mailbox.scala:225)\n\tat akka.dispatch.Mailbox.exec(Mailbox.scala:235)\n\tat akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)\n\tat akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)\n\tat akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)\n\tat akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)\nCaused by: java.lang.RuntimeException: Retries exceeded for getRecords operation - all 3 retry attempts failed.\n\tat software.amazon.kinesis.connectors.flink.proxy.KinesisProxy.getRecords(KinesisProxy.java:259)\n\tat software.amazon.kinesis.connectors.flink.internals.publisher.polling.PollingRecordPublisher.getRecords(PollingRecordPublisher.java:162)\n\tat software.amazon.kinesis.connectors.flink.internals.publisher.polling.PollingRecordPublisher.run(PollingRecordPublisher.java:112)\n\tat software.amazon.kinesis.connectors.flink.internals.publisher.polling.PollingRecordPublisher.run(PollingRecordPublisher.java:102)\n\tat software.amazon.kinesis.connectors.flink.internals.ShardConsumer.run(ShardConsumer.java:112)\n\tat java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)\n\tat java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat java.base/java.lang.Thread.run(Thread.java:829)\n</div>\n        </div>\n    </div>\n</div>\n"
+            "data": "<div class='container ng-scope' style='padding-left:0px;padding-right:0px;'>\n    <div class='panel panel-danger'>\n        <div class='panel-heading' ng-click='isOpen=!isOpen' ng-init='isOpen=false' style=\"cursor:pointer\">\n            <div class='plainTextContainer' style='font-weight:bolder'><i class=\"fa fa-caret-right fa-fw\" style=\"padding-right:7px;transition:all 0.3s;{{isOpen?'transform:rotate(90deg);transform-origin:25% 45%':''}}\"></i>Job was cancelled.</div>\n        </div>\n        <div class='panel-collapse' uib-collapse='!isOpen'>\n            <div class='text' style='max-height:300px;overflow:auto;padding:10px'>java.io.IOException: Fail to run stream sql job\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:172)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:105)\n\tat org.apache.zeppelin.flink.FlinkStreamSqlInterpreter.callInnerSelect(FlinkStreamSqlInterpreter.java:89)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callSelect(FlinkSqlInterrpeter.java:503)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callCommand(FlinkSqlInterrpeter.java:266)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.runSqlList(FlinkSqlInterrpeter.java:160)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.internalInterpret(FlinkSqlInterrpeter.java:112)\n\tat org.apache.zeppelin.interpreter.AbstractInterpreter.interpret(AbstractInterpreter.java:47)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:110)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:852)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:744)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler.lambda$runJobInScheduler$0(ParallelScheduler.java:46)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat java.base/java.lang.Thread.run(Thread.java:829)\nCaused by: java.util.concurrent.ExecutionException: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: 403b028742404acbc9bef7046029dbda)\n\tat java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)\n\tat java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1999)\n\tat org.apache.flink.streaming.api.environment.StreamExecutionEnvironment.execute(StreamExecutionEnvironment.java:1719)\n\tat org.apache.flink.table.planner.delegation.ExecutorBase.execute(ExecutorBase.java:52)\n\tat org.apache.flink.table.api.internal.TableEnvironmentImpl.execute(TableEnvironmentImpl.java:1214)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:161)\n\t... 16 more\nCaused by: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: 403b028742404acbc9bef7046029dbda)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$getJobExecutionResult$6(ClusterClientJobClientAdapter.java:116)\n\tat java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2073)\n\tat org.apache.flink.client.program.rest.RestClusterClient.lambda$pollResourceAsync$22(RestClusterClient.java:602)\n\tat java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:859)\n\tat java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:837)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2073)\n\tat org.apache.flink.runtime.concurrent.FutureUtils.lambda$retryOperationWithDelay$8(FutureUtils.java:309)\n\tat java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:859)\n\tat java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:837)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)\n\tat java.base/java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:1085)\n\tat java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:478)\n\t... 3 more\nCaused by: org.apache.flink.runtime.client.JobCancellationException: Job was cancelled.\n\tat org.apache.flink.runtime.jobmaster.JobResult.toJobExecutionResult(JobResult.java:149)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$getJobExecutionResult$6(ClusterClientJobClientAdapter.java:114)\n\t... 18 more\n</div>\n        </div>\n    </div>\n</div>\n"
           }
         ]
       },
@@ -430,26 +500,71 @@
           "group": "flink",
           "values": [
             {
-              "jobUrl": "/flinkdashboard/#/job/5f64bc44dc04bdd12207b352d30e1628",
-              "$$hashKey": "object:26578"
+              "jobUrl": "/flinkdashboard/#/job/403b028742404acbc9bef7046029dbda",
+              "$$hashKey": "object:10948"
             }
           ],
           "interpreterSettingId": "flink"
         }
       },
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689680761899_880224314",
+      "jobName": "paragraph_1689823473205_979699548",
       "id": "paragraph_1689680761899_880224314",
-      "dateCreated": "2023-07-18T11:46:01+0000",
-      "dateStarted": "2023-07-19T03:52:26+0000",
-      "dateFinished": "2023-07-19T04:03:07+0000",
-      "status": "ERROR",
-      "$$hashKey": "object:6834"
+      "dateCreated": "2023-07-20T03:24:33+0000",
+      "status": "ABORT",
+      "$$hashKey": "object:3684",
+      "dateFinished": "2023-07-20T03:31:14+0000",
+      "dateStarted": "2023-07-20T03:26:34+0000"
+    },
+    {
+      "text": "%md \n## Tumbling Window\ncount ticker by ticker and window \n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T03:31:08+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689823835214_1999336802",
+      "id": "paragraph_1689823835214_1999336802",
+      "dateCreated": "2023-07-20T03:30:35+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:10356",
+      "dateFinished": "2023-07-20T03:31:08+0000",
+      "dateStarted": "2023-07-20T03:31:08+0000",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Tumbling Window</h2>\n<p>count ticker by ticker and window</p>\n\n</div>"
+          }
+        ]
+      }
     },
     {
       "text": "%flink.ssql(type=update)\nSELECT \n        stock_table.ticker as ticker, \n        COUNT(stock_table.ticker) AS ticker_count,\n        TUMBLE_ROWTIME(stock_table.event_time, INTERVAL '3' second) as time_event\nFROM stock_table\nGROUP BY TUMBLE(stock_table.event_time, INTERVAL '3' second), stock_table.ticker;",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T03:01:11+0000",
+      "dateUpdated": "2023-07-20T03:31:23+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -526,7 +641,7 @@
         "msg": [
           {
             "type": "TABLE",
-            "data": "ticker\tticker_count\ttime_event\nBNB\t1\t2023-07-19 03:01:11.999\nBNB\t2\t2023-07-19 03:01:14.999\nBNB\t1\t2023-07-19 03:01:17.999\nBNB\t1\t2023-07-19 03:01:23.999\nBNB\t2\t2023-07-19 03:01:26.999\nBNB\t1\t2023-07-19 03:01:29.999\nBNB\t1\t2023-07-19 03:01:32.999\nBNB\t1\t2023-07-19 03:01:41.999\nBNB\t3\t2023-07-19 03:01:44.999\nBNB\t1\t2023-07-19 03:01:53.999\nBNB\t1\t2023-07-19 03:02:05.999\nBNB\t1\t2023-07-19 03:02:08.999\nBNB\t1\t2023-07-19 03:02:11.999\nBNB\t2\t2023-07-19 03:02:20.999\nBNB\t1\t2023-07-19 03:02:23.999\nBNB\t1\t2023-07-19 03:02:32.999\nBNB\t1\t2023-07-19 03:02:35.999\nBNB\t1\t2023-07-19 03:02:44.999\nBNB\t1\t2023-07-19 03:02:59.999\nBNB\t1\t2023-07-19 03:03:02.999\nBNB\t2\t2023-07-19 03:03:14.999\nBNB\t1\t2023-07-19 03:03:20.999\nBNB\t1\t2023-07-19 03:03:23.999\nBNB\t1\t2023-07-19 03:03:32.999\nBNB\t1\t2023-07-19 03:03:47.999\nBNB\t1\t2023-07-19 03:03:59.999\nBNB\t2\t2023-07-19 03:04:02.999\nBNB\t2\t2023-07-19 03:04:05.999\nBNB\t1\t2023-07-19 03:04:14.999\nBNB\t1\t2023-07-19 03:04:20.999\nBNB\t2\t2023-07-19 03:04:32.999\nBNB\t2\t2023-07-19 03:04:41.999\nBNB\t1\t2023-07-19 03:04:44.999\nBNB\t1\t2023-07-19 03:04:53.999\nBTC\t1\t2023-07-19 03:01:05.999\nBTC\t1\t2023-07-19 03:01:08.999\nBTC\t1\t2023-07-19 03:01:11.999\nBTC\t1\t2023-07-19 03:01:17.999\nBTC\t2\t2023-07-19 03:01:20.999\nBTC\t1\t2023-07-19 03:01:29.999\nBTC\t1\t2023-07-19 03:01:32.999\nBTC\t1\t2023-07-19 03:01:35.999\nBTC\t1\t2023-07-19 03:01:50.999\nBTC\t1\t2023-07-19 03:02:05.999\nBTC\t1\t2023-07-19 03:02:14.999\nBTC\t1\t2023-07-19 03:02:41.999\nBTC\t1\t2023-07-19 03:02:53.999\nBTC\t1\t2023-07-19 03:03:05.999\nBTC\t2\t2023-07-19 03:03:08.999\nBTC\t1\t2023-07-19 03:03:14.999\nBTC\t1\t2023-07-19 03:03:23.999\nBTC\t1\t2023-07-19 03:03:32.999\nBTC\t1\t2023-07-19 03:03:35.999\nBTC\t1\t2023-07-19 03:03:38.999\nBTC\t1\t2023-07-19 03:03:44.999\nBTC\t1\t2023-07-19 03:04:05.999\nBTC\t1\t2023-07-19 03:04:14.999\nBTC\t2\t2023-07-19 03:04:17.999\nBTC\t1\t2023-07-19 03:04:20.999\nBTC\t1\t2023-07-19 03:04:23.999\nBTC\t1\t2023-07-19 03:04:47.999\nBTC\t1\t2023-07-19 03:04:50.999\nBTC\t1\t2023-07-19 03:04:53.999\nBTC\t1\t2023-07-19 03:04:56.999\nBTC\t1\t2023-07-19 03:05:08.999\nDOGE\t1\t2023-07-19 03:01:08.999\nDOGE\t1\t2023-07-19 03:01:17.999\nDOGE\t1\t2023-07-19 03:01:26.999\nDOGE\t1\t2023-07-19 03:01:29.999\nDOGE\t1\t2023-07-19 03:01:35.999\nDOGE\t1\t2023-07-19 03:01:38.999\nDOGE\t2\t2023-07-19 03:01:41.999\nDOGE\t2\t2023-07-19 03:01:47.999\nDOGE\t1\t2023-07-19 03:01:50.999\nDOGE\t1\t2023-07-19 03:01:56.999\nDOGE\t2\t2023-07-19 03:01:59.999\nDOGE\t1\t2023-07-19 03:02:11.999\nDOGE\t1\t2023-07-19 03:02:14.999\nDOGE\t1\t2023-07-19 03:02:17.999\nDOGE\t1\t2023-07-19 03:02:23.999\nDOGE\t1\t2023-07-19 03:02:26.999\nDOGE\t1\t2023-07-19 03:02:29.999\nDOGE\t1\t2023-07-19 03:02:32.999\nDOGE\t1\t2023-07-19 03:02:35.999\nDOGE\t1\t2023-07-19 03:02:44.999\nDOGE\t1\t2023-07-19 03:02:50.999\nDOGE\t1\t2023-07-19 03:02:53.999\nDOGE\t1\t2023-07-19 03:02:56.999\nDOGE\t1\t2023-07-19 03:03:20.999\nDOGE\t1\t2023-07-19 03:03:23.999\nDOGE\t1\t2023-07-19 03:03:26.999\nDOGE\t2\t2023-07-19 03:03:41.999\nDOGE\t2\t2023-07-19 03:03:44.999\nDOGE\t1\t2023-07-19 03:03:47.999\nDOGE\t1\t2023-07-19 03:03:50.999\nDOGE\t1\t2023-07-19 03:03:53.999\nDOGE\t1\t2023-07-19 03:03:59.999\nDOGE\t1\t2023-07-19 03:04:08.999\nDOGE\t1\t2023-07-19 03:04:14.999\nDOGE\t1\t2023-07-19 03:04:26.999\nDOGE\t2\t2023-07-19 03:04:29.999\nDOGE\t1\t2023-07-19 03:04:35.999\nDOGE\t1\t2023-07-19 03:04:41.999\nDOGE\t2\t2023-07-19 03:04:44.999\nDOGE\t1\t2023-07-19 03:04:50.999\nDOGE\t1\t2023-07-19 03:04:56.999\nDOGE\t1\t2023-07-19 03:05:02.999\nETH\t1\t2023-07-19 03:01:05.999\nETH\t1\t2023-07-19 03:01:08.999\nETH\t1\t2023-07-19 03:01:32.999\nETH\t1\t2023-07-19 03:01:35.999\nETH\t1\t2023-07-19 03:01:38.999\nETH\t1\t2023-07-19 03:01:50.999\nETH\t2\t2023-07-19 03:01:53.999\nETH\t2\t2023-07-19 03:01:56.999\nETH\t1\t2023-07-19 03:01:59.999\nETH\t1\t2023-07-19 03:02:02.999\nETH\t2\t2023-07-19 03:02:08.999\nETH\t1\t2023-07-19 03:02:11.999\nETH\t2\t2023-07-19 03:02:17.999\nETH\t1\t2023-07-19 03:02:20.999\nETH\t2\t2023-07-19 03:02:29.999\nETH\t1\t2023-07-19 03:02:32.999\nETH\t2\t2023-07-19 03:02:38.999\nETH\t1\t2023-07-19 03:02:41.999\nETH\t1\t2023-07-19 03:02:47.999\nETH\t2\t2023-07-19 03:02:50.999\nETH\t1\t2023-07-19 03:02:56.999\nETH\t2\t2023-07-19 03:02:59.999\nETH\t1\t2023-07-19 03:03:02.999\nETH\t1\t2023-07-19 03:03:08.999\nETH\t2\t2023-07-19 03:03:11.999\nETH\t2\t2023-07-19 03:03:17.999\nETH\t1\t2023-07-19 03:03:26.999\nETH\t2\t2023-07-19 03:03:29.999\nETH\t1\t2023-07-19 03:03:32.999\nETH\t2\t2023-07-19 03:03:35.999\nETH\t1\t2023-07-19 03:03:41.999\nETH\t1\t2023-07-19 03:03:47.999\nETH\t2\t2023-07-19 03:03:50.999\nETH\t2\t2023-07-19 03:03:53.999\nETH\t1\t2023-07-19 03:03:56.999\nETH\t1\t2023-07-19 03:04:02.999\nETH\t1\t2023-07-19 03:04:08.999\nETH\t1\t2023-07-19 03:04:11.999\nETH\t1\t2023-07-19 03:04:17.999\nETH\t1\t2023-07-19 03:04:20.999\nETH\t1\t2023-07-19 03:04:23.999\nETH\t2\t2023-07-19 03:04:26.999\nETH\t1\t2023-07-19 03:04:29.999\nETH\t1\t2023-07-19 03:04:32.999\nETH\t1\t2023-07-19 03:04:35.999\nETH\t1\t2023-07-19 03:04:47.999\nETH\t1\t2023-07-19 03:04:50.999\nETH\t1\t2023-07-19 03:04:53.999\nETH\t1\t2023-07-19 03:04:56.999\nETH\t2\t2023-07-19 03:04:59.999\nETH\t1\t2023-07-19 03:05:02.999\nETH\t2\t2023-07-19 03:05:05.999\nETH\t2\t2023-07-19 03:05:08.999\nXRP\t1\t2023-07-19 03:01:05.999\nXRP\t1\t2023-07-19 03:01:11.999\nXRP\t1\t2023-07-19 03:01:14.999\nXRP\t2\t2023-07-19 03:01:23.999\nXRP\t1\t2023-07-19 03:01:38.999\nXRP\t1\t2023-07-19 03:01:47.999\nXRP\t2\t2023-07-19 03:02:02.999\nXRP\t1\t2023-07-19 03:02:05.999\nXRP\t1\t2023-07-19 03:02:14.999\nXRP\t1\t2023-07-19 03:02:23.999\nXRP\t2\t2023-07-19 03:02:26.999\nXRP\t1\t2023-07-19 03:02:35.999\nXRP\t1\t2023-07-19 03:02:38.999\nXRP\t1\t2023-07-19 03:02:41.999\nXRP\t2\t2023-07-19 03:02:47.999\nXRP\t1\t2023-07-19 03:02:53.999\nXRP\t1\t2023-07-19 03:02:56.999\nXRP\t1\t2023-07-19 03:03:02.999\nXRP\t2\t2023-07-19 03:03:05.999\nXRP\t1\t2023-07-19 03:03:11.999\nXRP\t1\t2023-07-19 03:03:17.999\nXRP\t1\t2023-07-19 03:03:20.999\nXRP\t1\t2023-07-19 03:03:26.999\nXRP\t1\t2023-07-19 03:03:29.999\nXRP\t2\t2023-07-19 03:03:38.999\nXRP\t2\t2023-07-19 03:03:56.999\nXRP\t1\t2023-07-19 03:03:59.999\nXRP\t2\t2023-07-19 03:04:11.999\nXRP\t1\t2023-07-19 03:04:23.999\nXRP\t1\t2023-07-19 03:04:35.999\nXRP\t3\t2023-07-19 03:04:38.999\nXRP\t1\t2023-07-19 03:04:47.999\nXRP\t1\t2023-07-19 03:04:59.999\nXRP\t1\t2023-07-19 03:05:02.999\nXRP\t1\t2023-07-19 03:05:05.999\n"
+            "data": "ticker\tticker_count\ttime_event\nBNB\t1\t2023-07-20 10:31:50.999\nBNB\t1\t2023-07-20 10:31:56.999\nBNB\t2\t2023-07-20 10:32:02.999\nBNB\t1\t2023-07-20 10:32:08.999\nBNB\t2\t2023-07-20 10:32:11.999\nBNB\t1\t2023-07-20 10:32:14.999\nBNB\t1\t2023-07-20 10:32:23.999\nBNB\t1\t2023-07-20 10:32:29.999\nBNB\t2\t2023-07-20 10:32:35.999\nBNB\t1\t2023-07-20 10:32:38.999\nBNB\t1\t2023-07-20 10:32:56.999\nBNB\t2\t2023-07-20 10:32:59.999\nBNB\t1\t2023-07-20 10:33:05.999\nBNB\t2\t2023-07-20 10:33:11.999\nBNB\t1\t2023-07-20 10:33:17.999\nBNB\t2\t2023-07-20 10:33:23.999\nBNB\t1\t2023-07-20 10:33:26.999\nBNB\t1\t2023-07-20 10:33:29.999\nBNB\t1\t2023-07-20 10:33:32.999\nBNB\t1\t2023-07-20 10:33:35.999\nBNB\t3\t2023-07-20 10:33:50.999\nBNB\t1\t2023-07-20 10:33:53.999\nBNB\t1\t2023-07-20 10:33:59.999\nBNB\t3\t2023-07-20 10:34:02.999\nBNB\t2\t2023-07-20 10:34:17.999\nBNB\t1\t2023-07-20 10:34:29.999\nBNB\t2\t2023-07-20 10:34:32.999\nBNB\t2\t2023-07-20 10:34:35.999\nBNB\t2\t2023-07-20 10:34:38.999\nBNB\t2\t2023-07-20 10:34:41.999\nBNB\t2\t2023-07-20 10:34:44.999\nBNB\t1\t2023-07-20 10:34:47.999\nBNB\t1\t2023-07-20 10:35:05.999\nBNB\t1\t2023-07-20 10:35:14.999\nBNB\t1\t2023-07-20 10:35:17.999\nBNB\t1\t2023-07-20 10:35:20.999\nBNB\t1\t2023-07-20 10:35:29.999\nBNB\t2\t2023-07-20 10:35:41.999\nBNB\t1\t2023-07-20 10:35:47.999\nBNB\t1\t2023-07-20 10:35:53.999\nBNB\t1\t2023-07-20 10:36:08.999\nBNB\t1\t2023-07-20 10:36:11.999\nBNB\t1\t2023-07-20 10:36:14.999\nBNB\t1\t2023-07-20 10:36:20.999\nBNB\t1\t2023-07-20 10:36:23.999\nBNB\t1\t2023-07-20 10:36:26.999\nBNB\t1\t2023-07-20 10:36:35.999\nBNB\t1\t2023-07-20 10:36:41.999\nBNB\t1\t2023-07-20 10:36:44.999\nBNB\t1\t2023-07-20 10:36:56.999\nBNB\t2\t2023-07-20 10:36:59.999\nBNB\t2\t2023-07-20 10:37:02.999\nBNB\t1\t2023-07-20 10:37:08.999\nBNB\t1\t2023-07-20 10:37:14.999\nBTC\t1\t2023-07-20 10:31:47.999\nBTC\t1\t2023-07-20 10:32:23.999\nBTC\t1\t2023-07-20 10:32:26.999\nBTC\t1\t2023-07-20 10:32:29.999\nBTC\t1\t2023-07-20 10:32:38.999\nBTC\t1\t2023-07-20 10:32:41.999\nBTC\t1\t2023-07-20 10:32:50.999\nBTC\t1\t2023-07-20 10:32:56.999\nBTC\t1\t2023-07-20 10:33:02.999\nBTC\t2\t2023-07-20 10:33:20.999\nBTC\t1\t2023-07-20 10:33:26.999\nBTC\t1\t2023-07-20 10:33:29.999\nBTC\t2\t2023-07-20 10:33:32.999\nBTC\t1\t2023-07-20 10:33:38.999\nBTC\t2\t2023-07-20 10:33:41.999\nBTC\t1\t2023-07-20 10:33:44.999\nBTC\t1\t2023-07-20 10:33:47.999\nBTC\t1\t2023-07-20 10:33:53.999\nBTC\t1\t2023-07-20 10:34:05.999\nBTC\t1\t2023-07-20 10:34:08.999\nBTC\t1\t2023-07-20 10:34:11.999\nBTC\t2\t2023-07-20 10:34:14.999\nBTC\t1\t2023-07-20 10:34:35.999\nBTC\t2\t2023-07-20 10:34:50.999\nBTC\t1\t2023-07-20 10:35:08.999\nBTC\t1\t2023-07-20 10:35:23.999\nBTC\t1\t2023-07-20 10:35:26.999\nBTC\t1\t2023-07-20 10:35:32.999\nBTC\t1\t2023-07-20 10:35:50.999\nBTC\t1\t2023-07-20 10:35:53.999\nBTC\t1\t2023-07-20 10:35:59.999\nBTC\t2\t2023-07-20 10:36:05.999\nBTC\t1\t2023-07-20 10:36:14.999\nBTC\t1\t2023-07-20 10:36:23.999\nBTC\t1\t2023-07-20 10:36:29.999\nBTC\t1\t2023-07-20 10:36:35.999\nBTC\t1\t2023-07-20 10:36:47.999\nBTC\t1\t2023-07-20 10:36:59.999\nBTC\t1\t2023-07-20 10:37:08.999\nBTC\t1\t2023-07-20 10:37:11.999\nDOGE\t1\t2023-07-20 10:31:47.999\nDOGE\t1\t2023-07-20 10:31:53.999\nDOGE\t1\t2023-07-20 10:31:56.999\nDOGE\t1\t2023-07-20 10:31:59.999\nDOGE\t1\t2023-07-20 10:32:02.999\nDOGE\t3\t2023-07-20 10:32:05.999\nDOGE\t1\t2023-07-20 10:32:14.999\nDOGE\t1\t2023-07-20 10:32:17.999\nDOGE\t1\t2023-07-20 10:32:20.999\nDOGE\t1\t2023-07-20 10:32:26.999\nDOGE\t1\t2023-07-20 10:32:32.999\nDOGE\t1\t2023-07-20 10:32:35.999\nDOGE\t2\t2023-07-20 10:32:53.999\nDOGE\t1\t2023-07-20 10:33:02.999\nDOGE\t2\t2023-07-20 10:33:05.999\nDOGE\t2\t2023-07-20 10:33:08.999\nDOGE\t1\t2023-07-20 10:33:11.999\nDOGE\t3\t2023-07-20 10:33:14.999\nDOGE\t1\t2023-07-20 10:33:17.999\nDOGE\t2\t2023-07-20 10:33:35.999\nDOGE\t2\t2023-07-20 10:33:44.999\nDOGE\t2\t2023-07-20 10:33:59.999\nDOGE\t1\t2023-07-20 10:34:08.999\nDOGE\t1\t2023-07-20 10:34:17.999\nDOGE\t2\t2023-07-20 10:34:20.999\nDOGE\t1\t2023-07-20 10:34:23.999\nDOGE\t2\t2023-07-20 10:34:29.999\nDOGE\t1\t2023-07-20 10:34:50.999\nDOGE\t1\t2023-07-20 10:34:53.999\nDOGE\t1\t2023-07-20 10:34:59.999\nDOGE\t1\t2023-07-20 10:35:02.999\nDOGE\t1\t2023-07-20 10:35:05.999\nDOGE\t2\t2023-07-20 10:35:08.999\nDOGE\t1\t2023-07-20 10:35:11.999\nDOGE\t2\t2023-07-20 10:35:14.999\nDOGE\t1\t2023-07-20 10:35:20.999\nDOGE\t1\t2023-07-20 10:35:23.999\nDOGE\t1\t2023-07-20 10:35:26.999\nDOGE\t1\t2023-07-20 10:35:32.999\nDOGE\t1\t2023-07-20 10:35:35.999\nDOGE\t1\t2023-07-20 10:35:38.999\nDOGE\t2\t2023-07-20 10:35:44.999\nDOGE\t2\t2023-07-20 10:35:56.999\nDOGE\t1\t2023-07-20 10:36:05.999\nDOGE\t2\t2023-07-20 10:36:08.999\nDOGE\t1\t2023-07-20 10:36:17.999\nDOGE\t1\t2023-07-20 10:36:20.999\nDOGE\t1\t2023-07-20 10:36:26.999\nDOGE\t1\t2023-07-20 10:36:29.999\nDOGE\t1\t2023-07-20 10:36:32.999\nDOGE\t2\t2023-07-20 10:36:38.999\nDOGE\t1\t2023-07-20 10:36:47.999\nDOGE\t1\t2023-07-20 10:36:50.999\nDOGE\t2\t2023-07-20 10:36:56.999\nDOGE\t1\t2023-07-20 10:37:05.999\nDOGE\t2\t2023-07-20 10:37:14.999\nETH\t1\t2023-07-20 10:31:44.999\nETH\t1\t2023-07-20 10:31:59.999\nETH\t2\t2023-07-20 10:32:08.999\nETH\t1\t2023-07-20 10:32:11.999\nETH\t1\t2023-07-20 10:32:14.999\nETH\t2\t2023-07-20 10:32:17.999\nETH\t1\t2023-07-20 10:32:20.999\nETH\t1\t2023-07-20 10:32:32.999\nETH\t1\t2023-07-20 10:32:41.999\nETH\t1\t2023-07-20 10:32:44.999\nETH\t3\t2023-07-20 10:32:47.999\nETH\t2\t2023-07-20 10:32:50.999\nETH\t1\t2023-07-20 10:32:59.999\nETH\t1\t2023-07-20 10:33:08.999\nETH\t1\t2023-07-20 10:33:29.999\nETH\t1\t2023-07-20 10:33:41.999\nETH\t1\t2023-07-20 10:33:47.999\nETH\t1\t2023-07-20 10:33:53.999\nETH\t1\t2023-07-20 10:33:56.999\nETH\t1\t2023-07-20 10:34:05.999\nETH\t1\t2023-07-20 10:34:08.999\nETH\t1\t2023-07-20 10:34:11.999\nETH\t1\t2023-07-20 10:34:14.999\nETH\t2\t2023-07-20 10:34:26.999\nETH\t1\t2023-07-20 10:34:38.999\nETH\t1\t2023-07-20 10:34:41.999\nETH\t1\t2023-07-20 10:34:44.999\nETH\t1\t2023-07-20 10:34:47.999\nETH\t1\t2023-07-20 10:34:53.999\nETH\t3\t2023-07-20 10:34:56.999\nETH\t1\t2023-07-20 10:34:59.999\nETH\t2\t2023-07-20 10:35:02.999\nETH\t1\t2023-07-20 10:35:17.999\nETH\t1\t2023-07-20 10:35:20.999\nETH\t1\t2023-07-20 10:35:32.999\nETH\t1\t2023-07-20 10:35:35.999\nETH\t1\t2023-07-20 10:35:38.999\nETH\t2\t2023-07-20 10:35:47.999\nETH\t1\t2023-07-20 10:35:50.999\nETH\t1\t2023-07-20 10:35:53.999\nETH\t1\t2023-07-20 10:36:02.999\nETH\t1\t2023-07-20 10:36:11.999\nETH\t2\t2023-07-20 10:36:17.999\nETH\t1\t2023-07-20 10:36:20.999\nETH\t1\t2023-07-20 10:36:35.999\nETH\t1\t2023-07-20 10:36:38.999\nETH\t1\t2023-07-20 10:36:41.999\nETH\t1\t2023-07-20 10:36:44.999\nETH\t1\t2023-07-20 10:36:47.999\nETH\t2\t2023-07-20 10:36:50.999\nETH\t2\t2023-07-20 10:36:53.999\nETH\t1\t2023-07-20 10:37:11.999\nXRP\t2\t2023-07-20 10:31:50.999\nXRP\t2\t2023-07-20 10:31:53.999\nXRP\t1\t2023-07-20 10:31:56.999\nXRP\t1\t2023-07-20 10:31:59.999\nXRP\t1\t2023-07-20 10:32:20.999\nXRP\t1\t2023-07-20 10:32:23.999\nXRP\t1\t2023-07-20 10:32:26.999\nXRP\t1\t2023-07-20 10:32:29.999\nXRP\t1\t2023-07-20 10:32:32.999\nXRP\t1\t2023-07-20 10:32:38.999\nXRP\t1\t2023-07-20 10:32:41.999\nXRP\t2\t2023-07-20 10:32:44.999\nXRP\t1\t2023-07-20 10:32:53.999\nXRP\t1\t2023-07-20 10:32:56.999\nXRP\t1\t2023-07-20 10:33:02.999\nXRP\t1\t2023-07-20 10:33:17.999\nXRP\t1\t2023-07-20 10:33:20.999\nXRP\t1\t2023-07-20 10:33:23.999\nXRP\t2\t2023-07-20 10:33:38.999\nXRP\t1\t2023-07-20 10:33:47.999\nXRP\t2\t2023-07-20 10:33:56.999\nXRP\t1\t2023-07-20 10:34:05.999\nXRP\t1\t2023-07-20 10:34:11.999\nXRP\t1\t2023-07-20 10:34:20.999\nXRP\t2\t2023-07-20 10:34:23.999\nXRP\t1\t2023-07-20 10:34:26.999\nXRP\t1\t2023-07-20 10:34:32.999\nXRP\t1\t2023-07-20 10:34:47.999\nXRP\t1\t2023-07-20 10:34:53.999\nXRP\t1\t2023-07-20 10:34:59.999\nXRP\t1\t2023-07-20 10:35:05.999\nXRP\t1\t2023-07-20 10:35:11.999\nXRP\t1\t2023-07-20 10:35:17.999\nXRP\t1\t2023-07-20 10:35:23.999\nXRP\t1\t2023-07-20 10:35:26.999\nXRP\t2\t2023-07-20 10:35:29.999\nXRP\t1\t2023-07-20 10:35:35.999\nXRP\t1\t2023-07-20 10:35:38.999\nXRP\t1\t2023-07-20 10:35:41.999\nXRP\t1\t2023-07-20 10:35:44.999\nXRP\t1\t2023-07-20 10:35:50.999\nXRP\t1\t2023-07-20 10:35:56.999\nXRP\t2\t2023-07-20 10:35:59.999\nXRP\t2\t2023-07-20 10:36:02.999\nXRP\t1\t2023-07-20 10:36:11.999\nXRP\t1\t2023-07-20 10:36:14.999\nXRP\t1\t2023-07-20 10:36:23.999\nXRP\t1\t2023-07-20 10:36:26.999\nXRP\t1\t2023-07-20 10:36:29.999\nXRP\t2\t2023-07-20 10:36:32.999\nXRP\t1\t2023-07-20 10:36:41.999\nXRP\t1\t2023-07-20 10:36:44.999\nXRP\t1\t2023-07-20 10:37:02.999\nXRP\t2\t2023-07-20 10:37:05.999\nXRP\t1\t2023-07-20 10:37:08.999\nXRP\t1\t2023-07-20 10:37:11.999\n"
           },
           {
             "type": "TEXT",
@@ -534,7 +649,7 @@
           },
           {
             "type": "ANGULAR",
-            "data": "<div class='container ng-scope' style='padding-left:0px;padding-right:0px;'>\n    <div class='panel panel-danger'>\n        <div class='panel-heading' ng-click='isOpen=!isOpen' ng-init='isOpen=false' style=\"cursor:pointer\">\n            <div class='plainTextContainer' style='font-weight:bolder'><i class=\"fa fa-caret-right fa-fw\" style=\"padding-right:7px;transition:all 0.3s;{{isOpen?'transform:rotate(90deg);transform-origin:25% 45%':''}}\"></i>RuntimeException: Retries exceeded for getRecords operation - all 3 retry attempts failed.</div>\n        </div>\n        <div class='panel-collapse' uib-collapse='!isOpen'>\n            <div class='text' style='max-height:300px;overflow:auto;padding:10px'>java.io.IOException: Fail to run stream sql job\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:172)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:105)\n\tat org.apache.zeppelin.flink.FlinkStreamSqlInterpreter.callInnerSelect(FlinkStreamSqlInterpreter.java:89)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callSelect(FlinkSqlInterrpeter.java:503)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callCommand(FlinkSqlInterrpeter.java:266)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.runSqlList(FlinkSqlInterrpeter.java:160)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.internalInterpret(FlinkSqlInterrpeter.java:112)\n\tat org.apache.zeppelin.interpreter.AbstractInterpreter.interpret(AbstractInterpreter.java:47)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:110)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:852)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:744)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler.lambda$runJobInScheduler$0(ParallelScheduler.java:46)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat java.base/java.lang.Thread.run(Thread.java:829)\nCaused by: java.util.concurrent.ExecutionException: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: 7f20710007fdcccd0c2dccf39be7a89e)\n\tat java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)\n\tat java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1999)\n\tat org.apache.flink.streaming.api.environment.StreamExecutionEnvironment.execute(StreamExecutionEnvironment.java:1719)\n\tat org.apache.flink.table.planner.delegation.ExecutorBase.execute(ExecutorBase.java:52)\n\tat org.apache.flink.table.api.internal.TableEnvironmentImpl.execute(TableEnvironmentImpl.java:1214)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:161)\n\t... 16 more\nCaused by: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: 7f20710007fdcccd0c2dccf39be7a89e)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$getJobExecutionResult$6(ClusterClientJobClientAdapter.java:116)\n\tat java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2073)\n\tat org.apache.flink.client.program.rest.RestClusterClient.lambda$pollResourceAsync$22(RestClusterClient.java:602)\n\tat java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:859)\n\tat java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:837)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2073)\n\tat org.apache.flink.runtime.concurrent.FutureUtils.lambda$retryOperationWithDelay$8(FutureUtils.java:309)\n\tat java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:859)\n\tat java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:837)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)\n\tat java.base/java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:1085)\n\tat java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:478)\n\t... 3 more\nCaused by: org.apache.flink.runtime.client.JobExecutionException: Job execution failed.\n\tat org.apache.flink.runtime.jobmaster.JobResult.toJobExecutionResult(JobResult.java:147)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$getJobExecutionResult$6(ClusterClientJobClientAdapter.java:114)\n\t... 18 more\nCaused by: org.apache.flink.runtime.JobException: Recovery is suppressed by NoRestartBackoffTimeStrategy\n\tat org.apache.flink.runtime.executiongraph.failover.flip1.ExecutionFailureHandler.handleFailure(ExecutionFailureHandler.java:116)\n\tat org.apache.flink.runtime.executiongraph.failover.flip1.ExecutionFailureHandler.getFailureHandlingResult(ExecutionFailureHandler.java:78)\n\tat org.apache.flink.runtime.scheduler.DefaultScheduler.handleTaskFailure(DefaultScheduler.java:198)\n\tat org.apache.flink.runtime.scheduler.DefaultScheduler.maybeHandleTaskFailure(DefaultScheduler.java:191)\n\tat org.apache.flink.runtime.scheduler.DefaultScheduler.updateTaskExecutionStateInternal(DefaultScheduler.java:185)\n\tat org.apache.flink.runtime.scheduler.SchedulerBase.updateTaskExecutionState(SchedulerBase.java:522)\n\tat org.apache.flink.runtime.jobmaster.JobMaster.updateTaskExecutionState(JobMaster.java:400)\n\tat jdk.internal.reflect.GeneratedMethodAccessor86.invoke(Unknown Source)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\n\tat org.apache.flink.runtime.rpc.akka.AkkaRpcActor.handleRpcInvocation(AkkaRpcActor.java:284)\n\tat org.apache.flink.runtime.rpc.akka.AkkaRpcActor.handleRpcMessage(AkkaRpcActor.java:199)\n\tat org.apache.flink.runtime.rpc.akka.FencedAkkaRpcActor.handleRpcMessage(FencedAkkaRpcActor.java:74)\n\tat org.apache.flink.runtime.rpc.akka.AkkaRpcActor.handleMessage(AkkaRpcActor.java:152)\n\tat akka.japi.pf.UnitCaseStatement.apply(CaseStatements.scala:26)\n\tat akka.japi.pf.UnitCaseStatement.apply(CaseStatements.scala:21)\n\tat scala.PartialFunction.applyOrElse(PartialFunction.scala:123)\n\tat scala.PartialFunction.applyOrElse$(PartialFunction.scala:122)\n\tat akka.japi.pf.UnitCaseStatement.applyOrElse(CaseStatements.scala:21)\n\tat scala.PartialFunction$OrElse.applyOrElse(PartialFunction.scala:171)\n\tat scala.PartialFunction$OrElse.applyOrElse(PartialFunction.scala:172)\n\tat scala.PartialFunction$OrElse.applyOrElse(PartialFunction.scala:172)\n\tat akka.actor.Actor.aroundReceive(Actor.scala:517)\n\tat akka.actor.Actor.aroundReceive$(Actor.scala:515)\n\tat akka.actor.AbstractActor.aroundReceive(AbstractActor.scala:225)\n\tat akka.actor.ActorCell.receiveMessage(ActorCell.scala:592)\n\tat akka.actor.ActorCell.invoke(ActorCell.scala:561)\n\tat akka.dispatch.Mailbox.processMailbox(Mailbox.scala:258)\n\tat akka.dispatch.Mailbox.run(Mailbox.scala:225)\n\tat akka.dispatch.Mailbox.exec(Mailbox.scala:235)\n\tat akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)\n\tat akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)\n\tat akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)\n\tat akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)\nCaused by: java.lang.RuntimeException: Retries exceeded for getRecords operation - all 3 retry attempts failed.\n\tat software.amazon.kinesis.connectors.flink.proxy.KinesisProxy.getRecords(KinesisProxy.java:259)\n\tat software.amazon.kinesis.connectors.flink.internals.publisher.polling.PollingRecordPublisher.getRecords(PollingRecordPublisher.java:162)\n\tat software.amazon.kinesis.connectors.flink.internals.publisher.polling.PollingRecordPublisher.run(PollingRecordPublisher.java:112)\n\tat software.amazon.kinesis.connectors.flink.internals.publisher.polling.PollingRecordPublisher.run(PollingRecordPublisher.java:102)\n\tat software.amazon.kinesis.connectors.flink.internals.ShardConsumer.run(ShardConsumer.java:112)\n\tat java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)\n\tat java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat java.base/java.lang.Thread.run(Thread.java:829)\n</div>\n        </div>\n    </div>\n</div>\n"
+            "data": "<div class='container ng-scope' style='padding-left:0px;padding-right:0px;'>\n    <div class='panel panel-danger'>\n        <div class='panel-heading' ng-click='isOpen=!isOpen' ng-init='isOpen=false' style=\"cursor:pointer\">\n            <div class='plainTextContainer' style='font-weight:bolder'><i class=\"fa fa-caret-right fa-fw\" style=\"padding-right:7px;transition:all 0.3s;{{isOpen?'transform:rotate(90deg);transform-origin:25% 45%':''}}\"></i>Job was cancelled.</div>\n        </div>\n        <div class='panel-collapse' uib-collapse='!isOpen'>\n            <div class='text' style='max-height:300px;overflow:auto;padding:10px'>java.io.IOException: Fail to run stream sql job\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:172)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:105)\n\tat org.apache.zeppelin.flink.FlinkStreamSqlInterpreter.callInnerSelect(FlinkStreamSqlInterpreter.java:89)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callSelect(FlinkSqlInterrpeter.java:503)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callCommand(FlinkSqlInterrpeter.java:266)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.runSqlList(FlinkSqlInterrpeter.java:160)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.internalInterpret(FlinkSqlInterrpeter.java:112)\n\tat org.apache.zeppelin.interpreter.AbstractInterpreter.interpret(AbstractInterpreter.java:47)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:110)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:852)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:744)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler.lambda$runJobInScheduler$0(ParallelScheduler.java:46)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat java.base/java.lang.Thread.run(Thread.java:829)\nCaused by: java.util.concurrent.ExecutionException: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: 8f699274b9981ec738aace152d7213d4)\n\tat java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)\n\tat java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1999)\n\tat org.apache.flink.streaming.api.environment.StreamExecutionEnvironment.execute(StreamExecutionEnvironment.java:1719)\n\tat org.apache.flink.table.planner.delegation.ExecutorBase.execute(ExecutorBase.java:52)\n\tat org.apache.flink.table.api.internal.TableEnvironmentImpl.execute(TableEnvironmentImpl.java:1214)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:161)\n\t... 16 more\nCaused by: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: 8f699274b9981ec738aace152d7213d4)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$getJobExecutionResult$6(ClusterClientJobClientAdapter.java:116)\n\tat java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2073)\n\tat org.apache.flink.client.program.rest.RestClusterClient.lambda$pollResourceAsync$22(RestClusterClient.java:602)\n\tat java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:859)\n\tat java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:837)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2073)\n\tat org.apache.flink.runtime.concurrent.FutureUtils.lambda$retryOperationWithDelay$8(FutureUtils.java:309)\n\tat java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:859)\n\tat java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:837)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)\n\tat java.base/java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:1085)\n\tat java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:478)\n\t... 3 more\nCaused by: org.apache.flink.runtime.client.JobCancellationException: Job was cancelled.\n\tat org.apache.flink.runtime.jobmaster.JobResult.toJobExecutionResult(JobResult.java:149)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$getJobExecutionResult$6(ClusterClientJobClientAdapter.java:114)\n\t... 18 more\n</div>\n        </div>\n    </div>\n</div>\n"
           }
         ]
       },
@@ -547,26 +662,136 @@
           "group": "flink",
           "values": [
             {
-              "jobUrl": "/flinkdashboard/#/job/7f20710007fdcccd0c2dccf39be7a89e",
-              "$$hashKey": "object:21421"
+              "jobUrl": "/flinkdashboard/#/job/8f699274b9981ec738aace152d7213d4",
+              "$$hashKey": "object:17203"
             }
           ],
           "interpreterSettingId": "flink"
         }
       },
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689668458228_966542685",
+      "jobName": "paragraph_1689823473208_1500465133",
       "id": "paragraph_1689668458228_966542685",
-      "dateCreated": "2023-07-18T08:20:58+0000",
-      "dateStarted": "2023-07-19T03:00:43+0000",
-      "dateFinished": "2023-07-19T03:05:24+0000",
-      "status": "ERROR",
-      "$$hashKey": "object:6835"
+      "dateCreated": "2023-07-20T03:24:33+0000",
+      "status": "ABORT",
+      "$$hashKey": "object:3685",
+      "dateFinished": "2023-07-20T03:37:24+0000",
+      "dateStarted": "2023-07-20T03:31:24+0000"
+    },
+    {
+      "text": "%md \n\n## Sliding Window \n\n- calculate average stock price group by ticker and window\n- window width 1 minute, update each 10 seconds\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T03:40:53+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689823893037_290615300",
+      "id": "paragraph_1689823893037_290615300",
+      "dateCreated": "2023-07-20T03:31:33+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:11455",
+      "dateFinished": "2023-07-20T03:40:53+0000",
+      "dateStarted": "2023-07-20T03:40:53+0000",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Sliding Window</h2>\n<ul>\n<li>calculate average stock price group by ticker and window</li>\n<li>window width 1 minute, update each 10 seconds</li>\n</ul>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%flink.ssql(type=update)\nSELECT \n        stock_table.ticker as ticker,\n        AVG(stock_table.price) AS avg_price,\n        HOP_ROWTIME(stock_table.event_time, INTERVAL '10' second, INTERVAL '1' minute) as hop_time\nFROM stock_table\nGROUP BY HOP(stock_table.event_time, INTERVAL '10' second, INTERVAL '1' minute), stock_table.ticker;\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T03:41:01+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "/flinkdashboard/#/job/2469ad340ebad138ca7adad2af2ebb4a",
+              "$$hashKey": "object:23969"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689823927151_1177042418",
+      "id": "paragraph_1689823927151_1177042418",
+      "dateCreated": "2023-07-20T03:32:07+0000",
+      "status": "ABORT",
+      "focus": true,
+      "$$hashKey": "object:12153",
+      "dateFinished": "2023-07-20T03:46:30+0000",
+      "dateStarted": "2023-07-20T03:41:01+0000",
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "ticker\tavg_price\thop_time\nBNB\t27.61\t2023-07-20 10:41:29.999\nBNB\t57.330000000000005\t2023-07-20 10:41:39.999\nBNB\t57.7075\t2023-07-20 10:41:49.999\nBNB\t58.03111111111111\t2023-07-20 10:41:59.999\nBNB\t54.50083333333333\t2023-07-20 10:42:09.999\nBNB\t51.94307692307692\t2023-07-20 10:42:19.999\nBNB\t52.99071428571428\t2023-07-20 10:42:29.999\nBNB\t55.251875\t2023-07-20 10:42:39.999\nBNB\t54.268125000000005\t2023-07-20 10:42:49.999\nBNB\t49.15833333333333\t2023-07-20 10:42:59.999\nBNB\t49.910000000000004\t2023-07-20 10:43:09.999\nBNB\t53.09444444444445\t2023-07-20 10:43:19.999\nBNB\t60.24625\t2023-07-20 10:43:29.999\nBNB\t52.66833333333333\t2023-07-20 10:43:39.999\nBNB\t51.62571428571429\t2023-07-20 10:43:49.999\nBNB\t53.213750000000005\t2023-07-20 10:43:59.999\nBNB\t60.239999999999995\t2023-07-20 10:44:09.999\nBNB\t58.17222222222222\t2023-07-20 10:44:19.999\nBNB\t52.34444444444444\t2023-07-20 10:44:29.999\nBNB\t58.504999999999995\t2023-07-20 10:44:39.999\nBNB\t61.86\t2023-07-20 10:44:49.999\nBNB\t62.725\t2023-07-20 10:44:59.999\nBNB\t50.48\t2023-07-20 10:45:09.999\nBNB\t53.92750000000001\t2023-07-20 10:45:19.999\nBNB\t54.00307692307692\t2023-07-20 10:45:29.999\nBNB\t43.662727272727274\t2023-07-20 10:45:39.999\nBNB\t39.56166666666666\t2023-07-20 10:45:49.999\nBNB\t33.176923076923075\t2023-07-20 10:45:59.999\nBNB\t41.25166666666667\t2023-07-20 10:46:09.999\nBNB\t37.71363636363636\t2023-07-20 10:46:19.999\nBTC\t72.59\t2023-07-20 10:41:19.999\nBTC\t60.85\t2023-07-20 10:41:29.999\nBTC\t60.85\t2023-07-20 10:41:39.999\nBTC\t60.160000000000004\t2023-07-20 10:41:49.999\nBTC\t62.60888888888889\t2023-07-20 10:41:59.999\nBTC\t56.79416666666666\t2023-07-20 10:42:09.999\nBTC\t58.13142857142857\t2023-07-20 10:42:19.999\nBTC\t56.15818181818181\t2023-07-20 10:42:29.999\nBTC\t59.01999999999999\t2023-07-20 10:42:39.999\nBTC\t59.189090909090915\t2023-07-20 10:42:49.999\nBTC\t48.575384615384614\t2023-07-20 10:42:59.999\nBTC\t43.28692307692308\t2023-07-20 10:43:09.999\nBTC\t43.399375\t2023-07-20 10:43:19.999\nBTC\t44.792352941176475\t2023-07-20 10:43:29.999\nBTC\t40.47411764705882\t2023-07-20 10:43:39.999\nBTC\t38.89857142857142\t2023-07-20 10:43:49.999\nBTC\t41.17631578947368\t2023-07-20 10:43:59.999\nBTC\t46.993500000000004\t2023-07-20 10:44:09.999\nBTC\t42.927499999999995\t2023-07-20 10:44:19.999\nBTC\t39.711333333333336\t2023-07-20 10:44:29.999\nBTC\t42.41714285714285\t2023-07-20 10:44:39.999\nBTC\t46.18\t2023-07-20 10:44:49.999\nBTC\t48.17333333333334\t2023-07-20 10:44:59.999\nBTC\t37.783\t2023-07-20 10:45:09.999\nBTC\t43.251999999999995\t2023-07-20 10:45:19.999\nBTC\t37.10181818181818\t2023-07-20 10:45:29.999\nBTC\t32.30833333333333\t2023-07-20 10:45:39.999\nBTC\t34.05692307692308\t2023-07-20 10:45:49.999\nBTC\t33.01416666666667\t2023-07-20 10:45:59.999\nBTC\t45.136923076923075\t2023-07-20 10:46:09.999\nBTC\t37.64785714285715\t2023-07-20 10:46:19.999\nDOGE\t21.95\t2023-07-20 10:41:19.999\nDOGE\t21.95\t2023-07-20 10:41:29.999\nDOGE\t67.04571428571428\t2023-07-20 10:41:39.999\nDOGE\t56.55153846153847\t2023-07-20 10:41:49.999\nDOGE\t55.88714285714286\t2023-07-20 10:41:59.999\nDOGE\t55.509375000000006\t2023-07-20 10:42:09.999\nDOGE\t54.293888888888894\t2023-07-20 10:42:19.999\nDOGE\t51.58894736842105\t2023-07-20 10:42:29.999\nDOGE\t40.98615384615385\t2023-07-20 10:42:39.999\nDOGE\t42.29636363636364\t2023-07-20 10:42:49.999\nDOGE\t42.48307692307692\t2023-07-20 10:42:59.999\nDOGE\t43.630714285714284\t2023-07-20 10:43:09.999\nDOGE\t45.98333333333333\t2023-07-20 10:43:19.999\nDOGE\t46.54499999999999\t2023-07-20 10:43:29.999\nDOGE\t48.12642857142856\t2023-07-20 10:43:39.999\nDOGE\t48.419230769230765\t2023-07-20 10:43:49.999\nDOGE\t53.17846153846154\t2023-07-20 10:43:59.999\nDOGE\t52.70399999999999\t2023-07-20 10:44:09.999\nDOGE\t53.248333333333335\t2023-07-20 10:44:19.999\nDOGE\t51.498461538461534\t2023-07-20 10:44:29.999\nDOGE\t53.49\t2023-07-20 10:44:39.999\nDOGE\t54.031666666666666\t2023-07-20 10:44:49.999\nDOGE\t47.281666666666666\t2023-07-20 10:44:59.999\nDOGE\t52.77357142857142\t2023-07-20 10:45:09.999\nDOGE\t52.665\t2023-07-20 10:45:19.999\nDOGE\t56.53357142857143\t2023-07-20 10:45:29.999\nDOGE\t49.074285714285715\t2023-07-20 10:45:39.999\nDOGE\t48.18999999999999\t2023-07-20 10:45:49.999\nDOGE\t50.642500000000005\t2023-07-20 10:45:59.999\nDOGE\t43.885\t2023-07-20 10:46:09.999\nDOGE\t40.004\t2023-07-20 10:46:19.999\nETH\t55.75749999999999\t2023-07-20 10:41:19.999\nETH\t52.15625\t2023-07-20 10:41:29.999\nETH\t55.612\t2023-07-20 10:41:39.999\nETH\t55.612\t2023-07-20 10:41:49.999\nETH\t55.612\t2023-07-20 10:41:59.999\nETH\t56.37833333333333\t2023-07-20 10:42:09.999\nETH\t61.143333333333345\t2023-07-20 10:42:19.999\nETH\t70.18285714285715\t2023-07-20 10:42:29.999\nETH\t64.01285714285714\t2023-07-20 10:42:39.999\nETH\t60.922000000000004\t2023-07-20 10:42:49.999\nETH\t57.06666666666667\t2023-07-20 10:42:59.999\nETH\t53.595454545454544\t2023-07-20 10:43:09.999\nETH\t49.277\t2023-07-20 10:43:19.999\nETH\t46.25333333333333\t2023-07-20 10:43:29.999\nETH\t45.42333333333334\t2023-07-20 10:43:39.999\nETH\t41.28\t2023-07-20 10:43:49.999\nETH\t45.15833333333334\t2023-07-20 10:43:59.999\nETH\t57.541250000000005\t2023-07-20 10:44:09.999\nETH\t58.408\t2023-07-20 10:44:19.999\nETH\t56.60181818181818\t2023-07-20 10:44:29.999\nETH\t57.04\t2023-07-20 10:44:39.999\nETH\t61.78142857142858\t2023-07-20 10:44:49.999\nETH\t60.20785714285715\t2023-07-20 10:44:59.999\nETH\t59.27461538461538\t2023-07-20 10:45:09.999\nETH\t61.51999999999999\t2023-07-20 10:45:19.999\nETH\t64.09799999999998\t2023-07-20 10:45:29.999\nETH\t64.88363636363636\t2023-07-20 10:45:39.999\nETH\t61.51444444444444\t2023-07-20 10:45:49.999\nETH\t57.654545454545456\t2023-07-20 10:45:59.999\nETH\t55.6\t2023-07-20 10:46:09.999\nETH\t55.085\t2023-07-20 10:46:19.999\nXRP\t12.07\t2023-07-20 10:41:19.999\nXRP\t12.07\t2023-07-20 10:41:29.999\nXRP\t12.07\t2023-07-20 10:41:39.999\nXRP\t24.49666666666667\t2023-07-20 10:41:49.999\nXRP\t47.55\t2023-07-20 10:41:59.999\nXRP\t47.55\t2023-07-20 10:42:09.999\nXRP\t62.23199999999999\t2023-07-20 10:42:19.999\nXRP\t56.2675\t2023-07-20 10:42:29.999\nXRP\t54.873000000000005\t2023-07-20 10:42:39.999\nXRP\t58.73181818181818\t2023-07-20 10:42:49.999\nXRP\t55.488\t2023-07-20 10:42:59.999\nXRP\t59.7425\t2023-07-20 10:43:09.999\nXRP\t60.675384615384615\t2023-07-20 10:43:19.999\nXRP\t61.91857142857142\t2023-07-20 10:43:29.999\nXRP\t58.00428571428571\t2023-07-20 10:43:39.999\nXRP\t55.44916666666666\t2023-07-20 10:43:49.999\nXRP\t56.630769230769225\t2023-07-20 10:43:59.999\nXRP\t48.97461538461539\t2023-07-20 10:44:09.999\nXRP\t42.909166666666664\t2023-07-20 10:44:19.999\nXRP\t35.24090909090909\t2023-07-20 10:44:29.999\nXRP\t41.25\t2023-07-20 10:44:39.999\nXRP\t46.25076923076923\t2023-07-20 10:44:49.999\nXRP\t44.05916666666667\t2023-07-20 10:44:59.999\nXRP\t46.43333333333334\t2023-07-20 10:45:09.999\nXRP\t47.63333333333333\t2023-07-20 10:45:19.999\nXRP\t57.32909090909091\t2023-07-20 10:45:29.999\nXRP\t57.126363636363635\t2023-07-20 10:45:39.999\nXRP\t52.826\t2023-07-20 10:45:49.999\nXRP\t51.879090909090905\t2023-07-20 10:45:59.999\nXRP\t46.133333333333326\t2023-07-20 10:46:09.999\nXRP\t51.51642857142857\t2023-07-20 10:46:19.999\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "Fail to run sql command: SELECT \n        stock_table.ticker as ticker,\n        AVG(stock_table.price) AS avg_price,\n        HOP_ROWTIME(stock_table.event_time, INTERVAL '10' second, INTERVAL '1' minute) as hop_time\nFROM stock_table\nGROUP BY HOP(stock_table.event_time, INTERVAL '10' second, INTERVAL '1' minute), stock_table.ticker\n"
+          },
+          {
+            "type": "ANGULAR",
+            "data": "<div class='container ng-scope' style='padding-left:0px;padding-right:0px;'>\n    <div class='panel panel-danger'>\n        <div class='panel-heading' ng-click='isOpen=!isOpen' ng-init='isOpen=false' style=\"cursor:pointer\">\n            <div class='plainTextContainer' style='font-weight:bolder'><i class=\"fa fa-caret-right fa-fw\" style=\"padding-right:7px;transition:all 0.3s;{{isOpen?'transform:rotate(90deg);transform-origin:25% 45%':''}}\"></i>Job was cancelled.</div>\n        </div>\n        <div class='panel-collapse' uib-collapse='!isOpen'>\n            <div class='text' style='max-height:300px;overflow:auto;padding:10px'>java.io.IOException: Fail to run stream sql job\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:172)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:105)\n\tat org.apache.zeppelin.flink.FlinkStreamSqlInterpreter.callInnerSelect(FlinkStreamSqlInterpreter.java:89)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callSelect(FlinkSqlInterrpeter.java:503)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callCommand(FlinkSqlInterrpeter.java:266)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.runSqlList(FlinkSqlInterrpeter.java:160)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.internalInterpret(FlinkSqlInterrpeter.java:112)\n\tat org.apache.zeppelin.interpreter.AbstractInterpreter.interpret(AbstractInterpreter.java:47)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:110)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:852)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:744)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler.lambda$runJobInScheduler$0(ParallelScheduler.java:46)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat java.base/java.lang.Thread.run(Thread.java:829)\nCaused by: java.util.concurrent.ExecutionException: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: 2469ad340ebad138ca7adad2af2ebb4a)\n\tat java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:395)\n\tat java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1999)\n\tat org.apache.flink.streaming.api.environment.StreamExecutionEnvironment.execute(StreamExecutionEnvironment.java:1719)\n\tat org.apache.flink.table.planner.delegation.ExecutorBase.execute(ExecutorBase.java:52)\n\tat org.apache.flink.table.api.internal.TableEnvironmentImpl.execute(TableEnvironmentImpl.java:1214)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:161)\n\t... 16 more\nCaused by: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: 2469ad340ebad138ca7adad2af2ebb4a)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$getJobExecutionResult$6(ClusterClientJobClientAdapter.java:116)\n\tat java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:642)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2073)\n\tat org.apache.flink.client.program.rest.RestClusterClient.lambda$pollResourceAsync$22(RestClusterClient.java:602)\n\tat java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:859)\n\tat java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:837)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:2073)\n\tat org.apache.flink.runtime.concurrent.FutureUtils.lambda$retryOperationWithDelay$8(FutureUtils.java:309)\n\tat java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:859)\n\tat java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:837)\n\tat java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)\n\tat java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:610)\n\tat java.base/java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:1085)\n\tat java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:478)\n\t... 3 more\nCaused by: org.apache.flink.runtime.client.JobCancellationException: Job was cancelled.\n\tat org.apache.flink.runtime.jobmaster.JobResult.toJobExecutionResult(JobResult.java:149)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$getJobExecutionResult$6(ClusterClientJobClientAdapter.java:114)\n\t... 18 more\n</div>\n        </div>\n    </div>\n</div>\n"
+          }
+        ]
+      }
     },
     {
       "text": "%md \n## Enable Checkpointing",
       "user": "anonymous",
-      "dateUpdated": "2023-07-18T07:54:47+0000",
+      "dateUpdated": "2023-07-20T03:24:33+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -599,18 +824,16 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689666833645_1325240911",
+      "jobName": "paragraph_1689823473209_1937399960",
       "id": "paragraph_1689666833645_1325240911",
-      "dateCreated": "2023-07-18T07:53:53+0000",
-      "dateStarted": "2023-07-18T07:54:47+0000",
-      "dateFinished": "2023-07-18T07:54:47+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:6836"
+      "dateCreated": "2023-07-20T03:24:33+0000",
+      "status": "READY",
+      "$$hashKey": "object:3686"
     },
     {
       "text": "%flink.pyflink\nst_env.get_config().get_configuration().set_string(\n    \"execution.checkpointing.interval\", \"1min\"\n)\n",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T03:11:54+0000",
+      "dateUpdated": "2023-07-20T03:49:39+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -636,18 +859,18 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689666411338_470157078",
+      "jobName": "paragraph_1689823473212_1738933807",
       "id": "paragraph_1689666411338_470157078",
-      "dateCreated": "2023-07-18T07:46:51+0000",
-      "dateStarted": "2023-07-19T03:11:54+0000",
-      "dateFinished": "2023-07-19T03:11:55+0000",
+      "dateCreated": "2023-07-20T03:24:33+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:6837"
+      "$$hashKey": "object:3687",
+      "dateFinished": "2023-07-20T03:49:40+0000",
+      "dateStarted": "2023-07-20T03:49:39+0000"
     },
     {
-      "text": "%flink.pyflink\nst_env.execute_sql(\"\"\"DROP TABLE IF EXISTS output_table\"\"\")",
+      "text": "%flink.pyflink\nst_env.execute_sql(\"\"\"DROP TABLE IF EXISTS stock_output_table\"\"\")",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T03:03:00+0000",
+      "dateUpdated": "2023-07-20T03:52:16+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -666,31 +889,30 @@
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689735765398_658802956",
-      "id": "paragraph_1689735765398_658802956",
-      "dateCreated": "2023-07-19T03:02:45+0000",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:19971",
-      "dateFinished": "2023-07-19T03:03:03+0000",
-      "dateStarted": "2023-07-19T03:03:01+0000",
       "results": {
         "code": "SUCCESS",
         "msg": [
           {
             "type": "TEXT",
-            "data": "<pyflink.table.table_result.TableResult at 0x7fde0b489190>"
+            "data": "<pyflink.table.table_result.TableResult at 0x7f18b2e24050>"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689823473212_1957823660",
+      "id": "paragraph_1689735765398_658802956",
+      "dateCreated": "2023-07-20T03:24:33+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:3688",
+      "dateFinished": "2023-07-20T03:52:18+0000",
+      "dateStarted": "2023-07-20T03:52:16+0000"
     },
     {
       "text": "%md \n\n## Writing Results to Amazon S3",
       "user": "anonymous",
-      "dateUpdated": "2023-07-18T07:55:20+0000",
+      "dateUpdated": "2023-07-20T03:24:33+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -723,18 +945,16 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689666895919_1381888408",
+      "jobName": "paragraph_1689823473213_1159807878",
       "id": "paragraph_1689666895919_1381888408",
-      "dateCreated": "2023-07-18T07:54:55+0000",
-      "dateStarted": "2023-07-18T07:55:20+0000",
-      "dateFinished": "2023-07-18T07:55:20+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:6838"
+      "dateCreated": "2023-07-20T03:24:33+0000",
+      "status": "READY",
+      "$$hashKey": "object:3689"
     },
     {
-      "text": "%flink.pyflink\n\ntable_name = \"output_table\"\nbucket_name = \"data-lake-demo-17072023\"\n\nst_env.execute_sql(\"\"\"CREATE TABLE {0} (\n                ticker VARCHAR(6),\n                price DOUBLE,\n                event_time TIMESTAMP(3)\n              )\n              PARTITIONED BY (ticker)\n              WITH (\n                  'connector'='filesystem',\n                  'path'='s3a://{1}/',\n                  'format'='csv',\n                  'sink.partition-commit.policy.kind'='success-file',\n                  'sink.partition-commit.delay' = '1 min'\n              )\"\"\".format(table_name, bucket_name))",
+      "text": "%flink.pyflink\n\noutput_table_name = \"stock_output_table\"\nbucket_name = \"data-lake-demo-17072023\"\n\nst_env.execute_sql(\"\"\"CREATE TABLE {0} (\n                ticker VARCHAR(6),\n                price DOUBLE,\n                event_time TIMESTAMP(3)\n              )\n              PARTITIONED BY (ticker)\n              WITH (\n                  'connector'='filesystem',\n                  'path'='s3a://{1}/hehe/',\n                  'format'='csv',\n                  'sink.partition-commit.policy.kind'='success-file',\n                  'sink.partition-commit.delay' = '1 min'\n              )\"\"\".format(table_name, bucket_name))",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T04:39:22+0000",
+      "dateUpdated": "2023-07-20T03:52:19+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -755,29 +975,29 @@
         "forms": {}
       },
       "results": {
-        "code": "ERROR",
+        "code": "SUCCESS",
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m\n\u001b[0;31mPy4JJavaError\u001b[0m                             Traceback (most recent call last)\n\u001b[0;32m<ipython-input-126-3cfce56166f2>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[1;32m     14\u001b[0m                   \u001b[0;34m'sink.partition-commit.policy.kind'\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m'success-file'\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     15\u001b[0m                   \u001b[0;34m'sink.partition-commit.delay'\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'1 min'\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 16\u001b[0;31m               )\"\"\".format(table_name, bucket_name))\n\u001b[0m\n\u001b[0;32m/opt/flink/opt/python/pyflink.zip/pyflink/table/table_environment.py\u001b[0m in \u001b[0;36mexecute_sql\u001b[0;34m(self, stmt)\u001b[0m\n\u001b[1;32m    541\u001b[0m         \"\"\"\n\u001b[1;32m    542\u001b[0m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_before_execute\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 543\u001b[0;31m         \u001b[0;32mreturn\u001b[0m \u001b[0mTableResult\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_j_tenv\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mexecuteSql\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mstmt\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    544\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    545\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mcreate_statement_set\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/tmp/zeppelin_jupyter_kernel_python6226058980286278861/py4j-src-0.10.7.zip/py4j/java_gateway.py\u001b[0m in \u001b[0;36m__call__\u001b[0;34m(self, *args)\u001b[0m\n\u001b[1;32m   1255\u001b[0m         \u001b[0manswer\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mgateway_client\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msend_command\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mcommand\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1256\u001b[0m         return_value = get_return_value(\n\u001b[0;32m-> 1257\u001b[0;31m             answer, self.gateway_client, self.target_id, self.name)\n\u001b[0m\u001b[1;32m   1258\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1259\u001b[0m         \u001b[0;32mfor\u001b[0m \u001b[0mtemp_arg\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mtemp_args\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/flink/opt/python/pyflink.zip/pyflink/util/exceptions.py\u001b[0m in \u001b[0;36mdeco\u001b[0;34m(*a, **kw)\u001b[0m\n\u001b[1;32m    145\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mdeco\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0ma\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkw\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    146\u001b[0m         \u001b[0;32mtry\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 147\u001b[0;31m             \u001b[0;32mreturn\u001b[0m \u001b[0mf\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0ma\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkw\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    148\u001b[0m         \u001b[0;32mexcept\u001b[0m \u001b[0mPy4JJavaError\u001b[0m \u001b[0;32mas\u001b[0m \u001b[0me\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    149\u001b[0m             \u001b[0ms\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0me\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mjava_exception\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtoString\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/tmp/zeppelin_jupyter_kernel_python6226058980286278861/py4j-src-0.10.7.zip/py4j/protocol.py\u001b[0m in \u001b[0;36mget_return_value\u001b[0;34m(answer, gateway_client, target_id, name)\u001b[0m\n\u001b[1;32m    326\u001b[0m                 raise Py4JJavaError(\n\u001b[1;32m    327\u001b[0m                     \u001b[0;34m\"An error occurred while calling {0}{1}{2}.\\n\"\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 328\u001b[0;31m                     format(target_id, \".\", name), value)\n\u001b[0m\u001b[1;32m    329\u001b[0m             \u001b[0;32melse\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    330\u001b[0m                 raise Py4JError(\n\n\u001b[0;31mPy4JJavaError\u001b[0m: An error occurred while calling o24.executeSql.\n: org.apache.flink.table.api.ValidationException: Could not execute CreateTable in path `hive`.`default`.`output_table`\n\tat org.apache.flink.table.catalog.CatalogManager.execute(CatalogManager.java:793)\n\tat org.apache.flink.table.catalog.CatalogManager.createTable(CatalogManager.java:631)\n\tat org.apache.flink.table.api.internal.TableEnvironmentImpl.executeOperation(TableEnvironmentImpl.java:796)\n\tat org.apache.flink.table.api.internal.TableEnvironmentImpl.executeSql(TableEnvironmentImpl.java:690)\n\tat jdk.internal.reflect.GeneratedMethodAccessor53.invoke(Unknown Source)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\n\tat py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)\n\tat py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:357)\n\tat py4j.Gateway.invoke(Gateway.java:282)\n\tat py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)\n\tat py4j.commands.CallCommand.execute(CallCommand.java:79)\n\tat py4j.GatewayConnection.run(GatewayConnection.java:238)\n\tat java.base/java.lang.Thread.run(Thread.java:829)\nCaused by: org.apache.flink.table.catalog.exceptions.TableAlreadyExistException: Table (or view) default.output_table already exists in Catalog hive.\n\tat org.apache.flink.table.catalog.hive.HiveCatalog.createTable(HiveCatalog.java:447)\n\tat org.apache.flink.table.catalog.CatalogManager.lambda$createTable$10(CatalogManager.java:632)\n\tat org.apache.flink.table.catalog.CatalogManager.execute(CatalogManager.java:791)\n\t... 13 more\nCaused by: AlreadyExistsException(message:Table output_table already exists.)\n\tat com.amazonaws.glue.catalog.metastore.GlueMetastoreClientDelegateWithFlinkProperties.validateNewTable(GlueMetastoreClientDelegateWithFlinkProperties.java:197)\n\tat com.amazonaws.glue.catalog.metastore.GlueMetastoreClientDelegateWithFlinkProperties.createTable(GlueMetastoreClientDelegateWithFlinkProperties.java:114)\n\tat com.amazonaws.glue.catalog.metastore.AWSCatalogMetastoreClient.createTable(AWSCatalogMetastoreClient.java:664)\n\tat org.apache.flink.table.catalog.hive.client.HiveMetastoreClientWrapper.createTable(HiveMetastoreClientWrapper.java:148)\n\tat org.apache.flink.table.catalog.hive.HiveCatalog.createTable(HiveCatalog.java:443)\n\t... 15 more\n"
+            "data": "<pyflink.table.table_result.TableResult at 0x7f18b3433250>"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689666920528_2143389908",
+      "jobName": "paragraph_1689823473213_1835994420",
       "id": "paragraph_1689666920528_2143389908",
-      "dateCreated": "2023-07-18T07:55:20+0000",
-      "dateStarted": "2023-07-19T04:39:22+0000",
-      "dateFinished": "2023-07-19T04:39:23+0000",
-      "status": "ERROR",
-      "$$hashKey": "object:6839"
+      "dateCreated": "2023-07-20T03:24:33+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:3690",
+      "dateFinished": "2023-07-20T03:52:20+0000",
+      "dateStarted": "2023-07-20T03:52:19+0000"
     },
     {
-      "text": "%flink.pyflink\ntable_result = st_env.execute_sql(\"INSERT INTO {0} SELECT * FROM {1}\".format(\"output_table\", \"stock_table\"))",
+      "text": "%flink.pyflink\ntable_result = st_env.execute_sql(\"INSERT INTO {0} SELECT * FROM {1}\".format(output_table_name, \"stock_table\"))",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T04:39:29+0000",
+      "dateUpdated": "2023-07-20T03:52:23+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -810,26 +1030,26 @@
           "group": "flink",
           "values": [
             {
-              "jobUrl": "/flinkdashboard/#/job/f5fc6cd78ad77537b9d38d56cda65c8e",
-              "$$hashKey": "object:26662"
+              "jobUrl": "/flinkdashboard/#/job/3de5050c0c4ce4bb9aca31a6bc9d2102",
+              "$$hashKey": "object:24182"
             }
           ],
           "interpreterSettingId": "flink"
         }
       },
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689666974653_186417174",
+      "jobName": "paragraph_1689823473213_1421146570",
       "id": "paragraph_1689666974653_186417174",
-      "dateCreated": "2023-07-18T07:56:14+0000",
-      "dateStarted": "2023-07-19T04:39:29+0000",
-      "dateFinished": "2023-07-19T04:39:35+0000",
+      "dateCreated": "2023-07-20T03:24:33+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:6840"
+      "$$hashKey": "object:3691",
+      "dateFinished": "2023-07-20T03:52:30+0000",
+      "dateStarted": "2023-07-20T03:52:23+0000"
     },
     {
       "text": "%flink.pyflink\nprint(table_result.get_job_client().cancel())",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T03:09:03+0000",
+      "dateUpdated": "2023-07-20T03:54:54+0000",
       "progress": 0,
       "config": {
         "tableHide": true,
@@ -854,38 +1074,38 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "java.util.concurrent.CompletableFuture@6851be2[Not completed]\n"
+            "data": "java.util.concurrent.CompletableFuture@7905497a[Not completed]\n"
           }
         ]
       },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689667027070_64041482",
+      "jobName": "paragraph_1689823473213_15523727",
       "id": "paragraph_1689667027070_64041482",
-      "dateCreated": "2023-07-18T07:57:07+0000",
-      "dateStarted": "2023-07-19T03:09:03+0000",
-      "dateFinished": "2023-07-19T03:09:04+0000",
+      "dateCreated": "2023-07-20T03:24:33+0000",
       "status": "FINISHED",
-      "$$hashKey": "object:6841"
+      "$$hashKey": "object:3692",
+      "dateFinished": "2023-07-20T03:54:54+0000",
+      "dateStarted": "2023-07-20T03:54:54+0000"
     },
     {
       "text": "%flink.pyflink\n",
       "user": "anonymous",
-      "dateUpdated": "2023-07-18T08:02:11+0000",
+      "dateUpdated": "2023-07-20T03:24:33+0000",
       "progress": 0,
       "config": {
-        "colWidth": 12,
-        "fontSize": 9,
-        "enabled": true,
-        "results": {},
         "editorSetting": {
           "language": "python",
           "editOnDblClick": false,
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "editorMode": "ace/mode/python"
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -894,15 +1114,15 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689667331275_90229363",
+      "jobName": "paragraph_1689823473213_438056637",
       "id": "paragraph_1689667331275_90229363",
-      "dateCreated": "2023-07-18T08:02:11+0000",
+      "dateCreated": "2023-07-20T03:24:33+0000",
       "status": "READY",
-      "$$hashKey": "object:6842"
+      "$$hashKey": "object:3693"
     }
   ],
   "name": "Demo 2 Query Data Stream KDA",
-  "id": "2J69BPFFS",
+  "id": "2J86Y7NH2",
   "defaultInterpreterGroup": "flink",
   "version": "0.9.0",
   "noteParams": {},

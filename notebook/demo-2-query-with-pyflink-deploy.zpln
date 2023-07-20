@@ -1,0 +1,443 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n## Create a In-Memory Table",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T04:13:33+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Create a In-Memory Table</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689826413515_2112407113",
+      "id": "paragraph_1689666164351_1299629146",
+      "dateCreated": "2023-07-20T04:13:33+0000",
+      "status": "READY",
+      "focus": true,
+      "$$hashKey": "object:34140"
+    },
+    {
+      "text": "%flink.pyflink\ninput_table_name = \"stock_input_table\"\noutput_table_name = \"stock_output_table\"\nbucket_name = \"data-lake-demo-17072023\"\nregion = \"ap-southeast-1\"\ninput_stream_name = \"stock-input-stream\"\nprefix = \"stock-data\"",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T04:24:07+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689826750146_1883450497",
+      "id": "paragraph_1689826750146_1883450497",
+      "dateCreated": "2023-07-20T04:19:10+0000",
+      "dateStarted": "2023-07-20T04:24:07+0000",
+      "dateFinished": "2023-07-20T04:24:08+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:34141"
+    },
+    {
+      "text": "%flink.pyflink\nst_env.execute_sql(\"\"\"DROP TABLE IF EXISTS {0}\"\"\".format(input_table_name))\nst_env.execute_sql(\"\"\"DROP TABLE IF EXISTS {0}\"\"\".format(output_table_name))",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T04:22:33+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "<pyflink.table.table_result.TableResult at 0x7f18b2dba7d0>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689826413515_2065165288",
+      "id": "paragraph_1689666340925_262994735",
+      "dateCreated": "2023-07-20T04:13:33+0000",
+      "dateStarted": "2023-07-20T04:22:33+0000",
+      "dateFinished": "2023-07-20T04:22:34+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:34142"
+    },
+    {
+      "text": "%flink.pyflink\nst_env.execute_sql(\"\"\"\nCREATE TABLE {0} (\n                ticker VARCHAR(6),\n                price DOUBLE,\n                event_time TIMESTAMP(3),\n                WATERMARK FOR event_time AS event_time - INTERVAL '5' SECOND\n\n              )\n              PARTITIONED BY (ticker)\n              WITH (\n                'connector' = 'kinesis',\n                'stream' = '{1}',\n                'aws.region' = '{2}',\n                'scan.stream.initpos' = 'LATEST',\n                'format' = 'json',\n                'json.timestamp-format.standard' = 'ISO-8601'\n              ) \"\"\".format(input_table_name, input_stream_name, region))\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T04:23:22+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "<pyflink.table.table_result.TableResult at 0x7f18b2c74590>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689826413515_242690856",
+      "id": "paragraph_1689666257098_1985790858",
+      "dateCreated": "2023-07-20T04:13:33+0000",
+      "dateStarted": "2023-07-20T04:23:22+0000",
+      "dateFinished": "2023-07-20T04:23:24+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:34143"
+    },
+    {
+      "text": "%md \n## Enable Checkpointing",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T04:13:33+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Enable Checkpointing</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689826413524_1454726646",
+      "id": "paragraph_1689666833645_1325240911",
+      "dateCreated": "2023-07-20T04:13:33+0000",
+      "status": "READY",
+      "$$hashKey": "object:34144"
+    },
+    {
+      "text": "%flink.pyflink\nst_env.get_config().get_configuration().set_string(\n    \"execution.checkpointing.interval\", \"1min\"\n)\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T04:23:29+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689826413524_1195163551",
+      "id": "paragraph_1689666411338_470157078",
+      "dateCreated": "2023-07-20T04:13:33+0000",
+      "dateStarted": "2023-07-20T04:23:29+0000",
+      "dateFinished": "2023-07-20T04:23:30+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:34145"
+    },
+    {
+      "text": "%md \n\n## Writing Results to Amazon S3",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T04:13:33+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Writing Results to Amazon S3</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689826413524_1307820625",
+      "id": "paragraph_1689666895919_1381888408",
+      "dateCreated": "2023-07-20T04:13:33+0000",
+      "status": "READY",
+      "$$hashKey": "object:34146"
+    },
+    {
+      "text": "%flink.pyflink\nst_env.execute_sql(\"\"\"CREATE TABLE {0} (\n                ticker VARCHAR(6),\n                price DOUBLE,\n                event_time TIMESTAMP(3)\n              )\n              PARTITIONED BY (ticker)\n              WITH (\n                  'connector'='filesystem',\n                  'path'='s3a://{1}/{2}/',\n                  'format'='csv',\n                  'sink.partition-commit.policy.kind'='success-file',\n                  'sink.partition-commit.delay' = '1 min'\n              )\"\"\".format(output_table_name, bucket_name, prefix))",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T04:24:20+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "<pyflink.table.table_result.TableResult at 0x7f18d4722a50>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689826413524_2120670522",
+      "id": "paragraph_1689666920528_2143389908",
+      "dateCreated": "2023-07-20T04:13:33+0000",
+      "dateStarted": "2023-07-20T04:24:20+0000",
+      "dateFinished": "2023-07-20T04:24:21+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:34147"
+    },
+    {
+      "text": "%flink.pyflink\ntable_result = st_env.execute_sql(\"INSERT INTO {0} SELECT * FROM {1}\".format(output_table_name, input_table_name))",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T04:24:36+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "/flinkdashboard/#/job/7a023abcb5dc04ac15aadd750417e996",
+              "$$hashKey": "object:34809"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689826572645_2070347380",
+      "id": "paragraph_1689826572645_2070347380",
+      "dateCreated": "2023-07-20T04:16:12+0000",
+      "dateStarted": "2023-07-20T04:24:36+0000",
+      "dateFinished": "2023-07-20T04:24:42+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:34148"
+    },
+    {
+      "text": "%md\ntable_result.get_job_client().cancel()",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20T04:29:27+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>table_result.get_job_client().cancel()</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689827076376_23381425",
+      "id": "paragraph_1689827076376_23381425",
+      "dateCreated": "2023-07-20T04:24:36+0000",
+      "dateStarted": "2023-07-20T04:29:27+0000",
+      "dateFinished": "2023-07-20T04:29:27+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:34149"
+    }
+  ],
+  "name": "Demo 2 Query with PyFlink and Deploy",
+  "id": "2J4YEMWWD",
+  "defaultInterpreterGroup": "flink",
+  "version": "0.9.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Demo 2 Query with PyFlink and Deploy"
+}

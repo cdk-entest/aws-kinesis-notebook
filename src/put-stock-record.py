@@ -7,8 +7,8 @@ import time
 import math
 
 
-STREAM_NAME = "sensor-input-stream"
-REGION = "us-east-1"
+STREAM_NAME = "stock-input-stream"
+REGION = "ap-southeast-1"
 
 def get_data_sin(i):
     i = int(math.remainder(i, 4))
@@ -38,7 +38,7 @@ def generate(stream_name, kinesis_client):
             StreamName=stream_name,
             Data=json.dumps(data),
             PartitionKey="partitionkey")
-        # time.sleep(1)
+        time.sleep(1)
         i = i + 1
 
 

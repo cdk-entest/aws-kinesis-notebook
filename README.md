@@ -141,6 +141,21 @@ CREATE TABLE stock_output_table(
   )
 ```
 
+Finally insert data into the sink table
+
+```sql
+INSERT INTO stock_output_table SELECT * FROM stock_able
+```
+
+Cancel the writting s3 job
+
+```py
+%flink.pyflink
+print(table_result.get_job_client().cancel())
+```
+
+## Deploy Notebook
+
 ## Develop App
 
 - project structure

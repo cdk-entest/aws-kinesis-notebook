@@ -3,7 +3,7 @@
     {
       "text": "%md\n\n## Introduction \n\n- Create sensor-input-stream and sensor-output-stream\n- Create a table for sensor-input-stream \n- Do some analytics \n- Write to sensor-output-stream\n- Query sensor-otuput-stream ",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T05:35:25+0000",
+      "dateUpdated": "2023-07-20T03:59:01+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -36,19 +36,17 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689744887328_1547174609",
+      "jobName": "paragraph_1689825541226_400863937",
       "id": "paragraph_1689744097888_2032257471",
-      "dateCreated": "2023-07-19T05:34:47+0000",
-      "dateStarted": "2023-07-19T05:35:25+0000",
-      "dateFinished": "2023-07-19T05:35:28+0000",
-      "status": "FINISHED",
+      "dateCreated": "2023-07-20T03:59:01+0000",
+      "status": "READY",
       "focus": true,
-      "$$hashKey": "object:423"
+      "$$hashKey": "object:2107"
     },
     {
       "text": "%md \n## Create an In-Memory Table Connecting to sensor-stream ",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T05:36:43+0000",
+      "dateUpdated": "2023-07-20T03:59:01+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -81,18 +79,16 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689744887328_1846073250",
+      "jobName": "paragraph_1689825541226_1529943356",
       "id": "paragraph_1689742506523_161890088",
-      "dateCreated": "2023-07-19T05:34:47+0000",
-      "dateStarted": "2023-07-19T05:36:43+0000",
-      "dateFinished": "2023-07-19T05:36:43+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:424"
+      "dateCreated": "2023-07-20T03:59:01+0000",
+      "status": "READY",
+      "$$hashKey": "object:2108"
     },
     {
       "text": "%flink.ssql \nDROP TABLE IF EXISTS sensor_data\n",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T05:39:10+0000",
+      "dateUpdated": "2023-07-20T03:59:01+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -123,18 +119,16 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689744887329_706172506",
+      "jobName": "paragraph_1689825541226_468194446",
       "id": "paragraph_1689742894650_1146715946",
-      "dateCreated": "2023-07-19T05:34:47+0000",
-      "dateStarted": "2023-07-19T05:39:10+0000",
-      "dateFinished": "2023-07-19T05:39:11+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:425"
+      "dateCreated": "2023-07-20T03:59:01+0000",
+      "status": "READY",
+      "$$hashKey": "object:2109"
     },
     {
       "text": "%flink.ssql\n\nCREATE TABLE sensor_data (\n    sensor_id INTEGER,\n    current_temperature DOUBLE,\n    status VARCHAR(6),\n    event_time TIMESTAMP(3),\n    WATERMARK FOR event_time AS event_time - INTERVAL '5' SECOND\n)\nPARTITIONED BY (sensor_id)\nWITH (\n    'connector' = 'kinesis',\n    'stream' = 'sensor-stream',\n    'aws.region' = 'ap-southeast-1',\n    'scan.stream.initpos' = 'LATEST',\n    'format' = 'json',\n    'json.timestamp-format.standard' = 'ISO-8601'\n)",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T05:39:13+0000",
+      "dateUpdated": "2023-07-20T03:59:01+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -165,106 +159,16 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689744887329_606057665",
+      "jobName": "paragraph_1689825541226_1320461102",
       "id": "paragraph_1689742396621_1721830328",
-      "dateCreated": "2023-07-19T05:34:47+0000",
-      "dateStarted": "2023-07-19T05:39:13+0000",
-      "dateFinished": "2023-07-19T05:39:14+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:426"
-    },
-    {
-      "text": "%md \n## Query the sensor-stream  \n",
-      "user": "anonymous",
-      "dateUpdated": "2023-07-19T05:35:48+0000",
-      "progress": 0,
-      "config": {
-        "tableHide": false,
-        "editorSetting": {
-          "language": "markdown",
-          "editOnDblClick": true,
-          "completionKey": "TAB",
-          "completionSupport": false
-        },
-        "colWidth": 12,
-        "editorMode": "ace/mode/markdown",
-        "fontSize": 9,
-        "editorHide": true,
-        "results": {},
-        "enabled": true
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<div class=\"markdown-body\">\n<h2>Query the sensor-stream</h2>\n\n</div>"
-          }
-        ]
-      },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689744887329_170048430",
-      "id": "paragraph_1689742541110_1201577881",
-      "dateCreated": "2023-07-19T05:34:47+0000",
-      "dateStarted": "2023-07-19T05:35:48+0000",
-      "dateFinished": "2023-07-19T05:35:48+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:427"
-    },
-    {
-      "text": "%md \n## Slidding Window 1 Minute and Interval 10 Seconds \n",
-      "user": "anonymous",
-      "dateUpdated": "2023-07-19T05:35:51+0000",
-      "progress": 0,
-      "config": {
-        "tableHide": false,
-        "editorSetting": {
-          "language": "markdown",
-          "editOnDblClick": true,
-          "completionKey": "TAB",
-          "completionSupport": false
-        },
-        "colWidth": 12,
-        "editorMode": "ace/mode/markdown",
-        "fontSize": 9,
-        "editorHide": true,
-        "results": {},
-        "enabled": true
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<div class=\"markdown-body\">\n<h2>Slidding Window 1 Minute and Interval 10 Seconds</h2>\n\n</div>"
-          }
-        ]
-      },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689744887329_1900577390",
-      "id": "paragraph_1689742590835_402853856",
-      "dateCreated": "2023-07-19T05:34:47+0000",
-      "dateStarted": "2023-07-19T05:35:51+0000",
-      "dateFinished": "2023-07-19T05:35:51+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:428"
+      "dateCreated": "2023-07-20T03:59:01+0000",
+      "status": "READY",
+      "$$hashKey": "object:2110"
     },
     {
       "text": "%md\n## Create sensor-output-stream Table \n",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T05:35:55+0000",
+      "dateUpdated": "2023-07-20T03:59:01+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -297,18 +201,16 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689744887329_1569067086",
+      "jobName": "paragraph_1689825541226_1442692395",
       "id": "paragraph_1689742658781_558665215",
-      "dateCreated": "2023-07-19T05:34:47+0000",
-      "dateStarted": "2023-07-19T05:35:55+0000",
-      "dateFinished": "2023-07-19T05:35:55+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:429"
+      "dateCreated": "2023-07-20T03:59:01+0000",
+      "status": "READY",
+      "$$hashKey": "object:2113"
     },
     {
       "text": "%flink.ssql \nDROP TABLE IF EXISTS sensor_state",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T05:34:47+0000",
+      "dateUpdated": "2023-07-20T03:59:01+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -330,16 +232,16 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689744887329_1011002038",
+      "jobName": "paragraph_1689825541226_1480181270",
       "id": "paragraph_1689743091920_109483859",
-      "dateCreated": "2023-07-19T05:34:47+0000",
+      "dateCreated": "2023-07-20T03:59:01+0000",
       "status": "READY",
-      "$$hashKey": "object:430"
+      "$$hashKey": "object:2114"
     },
     {
       "text": "%flink.ssql\n\nCREATE TABLE sensor_state (\n    status VARCHAR(6),\n    num BIGINT,\n    avg_current_temperature DOUBLE,\n    hop_time TIMESTAMP(3)\n)\nWITH (\n'connector' = 'kinesis',\n'stream' = 'sensor-output-stream',\n'aws.region' = 'ap-southeast-1',\n'scan.stream.initpos' = 'LATEST',\n'format' = 'json',\n'json.timestamp-format.standard' = 'ISO-8601');",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T05:34:47+0000",
+      "dateUpdated": "2023-07-20T03:59:01+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -361,16 +263,16 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689744887329_1131662574",
+      "jobName": "paragraph_1689825541226_888788093",
       "id": "paragraph_1689742705028_983208241",
-      "dateCreated": "2023-07-19T05:34:47+0000",
+      "dateCreated": "2023-07-20T03:59:01+0000",
       "status": "READY",
-      "$$hashKey": "object:431"
+      "$$hashKey": "object:2115"
     },
     {
       "text": "%md \n## Insert Records into sensor-output-stream Table \n",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T05:36:15+0000",
+      "dateUpdated": "2023-07-20T03:59:01+0000",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -403,18 +305,16 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689744887329_119740424",
+      "jobName": "paragraph_1689825541227_849930150",
       "id": "paragraph_1689742710732_1925374012",
-      "dateCreated": "2023-07-19T05:34:47+0000",
-      "dateStarted": "2023-07-19T05:36:15+0000",
-      "dateFinished": "2023-07-19T05:36:15+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:432"
+      "dateCreated": "2023-07-20T03:59:01+0000",
+      "status": "READY",
+      "$$hashKey": "object:2116"
     },
     {
       "text": "%flink.ssql(type=update)\n\nINSERT INTO sensor_state\nSELECT sensor_data.status,\n    COUNT(*) AS num,\n    AVG(sensor_data.current_temperature) AS avg_current_temperature,\n    HOP_ROWTIME(sensor_data.event_time, INTERVAL '10' second, INTERVAL '1' minute) as hop_time\nFROM sensor_data\nGROUP BY HOP(sensor_data.event_time, INTERVAL '10' second, INTERVAL '1' minute), sensor_data.status;",
       "user": "anonymous",
-      "dateUpdated": "2023-07-19T05:34:47+0000",
+      "dateUpdated": "2023-07-20T03:59:01+0000",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -436,66 +336,18 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689744887329_930921950",
+      "jobName": "paragraph_1689825541227_411511401",
       "id": "paragraph_1689742710421_801661268",
-      "dateCreated": "2023-07-19T05:34:47+0000",
+      "dateCreated": "2023-07-20T03:59:01+0000",
       "status": "READY",
-      "$$hashKey": "object:433"
-    },
-    {
-      "text": "%md \n## Query the sensor-output-stream with a Table ",
-      "user": "anonymous",
-      "dateUpdated": "2023-07-19T05:36:06+0000",
-      "progress": 0,
-      "config": {
-        "tableHide": false,
-        "editorSetting": {
-          "language": "markdown",
-          "editOnDblClick": true,
-          "completionKey": "TAB",
-          "completionSupport": false
-        },
-        "colWidth": 12,
-        "editorMode": "ace/mode/markdown",
-        "fontSize": 9,
-        "editorHide": true,
-        "results": {},
-        "enabled": true
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "HTML",
-            "data": "<div class=\"markdown-body\">\n<h2>Query the sensor-output-stream with a Table</h2>\n\n</div>"
-          }
-        ]
-      },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1689744887329_988521171",
-      "id": "paragraph_1689744189973_1935608406",
-      "dateCreated": "2023-07-19T05:34:47+0000",
-      "dateStarted": "2023-07-19T05:36:06+0000",
-      "dateFinished": "2023-07-19T05:36:06+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:434"
+      "$$hashKey": "object:2117"
     }
   ],
   "name": "Demo 3 Sensor Data Deploy",
-  "id": "2J598TPCV",
+  "id": "2J55M4B3F",
   "defaultInterpreterGroup": "flink",
   "version": "0.9.0",
-  "noteParams": {
-    "kda.deploy-as-application.s3-object": "s3://data-lake-demo-17072023/debug/zeppelin-code/debug-Demo_3_Sensor_Data_Deploy-2J598TPCV-2023-07-19T05:42:46.600900Z.zip",
-    "kda.deploy-as-application.app-name": "debug-Demo_3_Sensor_Data_Deploy-2J598TPCV",
-    "kda.deploy-as-application.latest-build": 1689745371975
-  },
+  "noteParams": {},
   "noteForms": {},
   "angularObjects": {},
   "config": {

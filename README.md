@@ -443,6 +443,12 @@ if __name__=="__main__":
     multi_consumer()
 ```
 
+Then we got the below error ProvisionedThroughputExceededException
+
+```
+An error occurred (ProvisionedThroughputExceededException) when calling the GetRecords operation (reached max retries: 4): Rate exceeded for Shard - 902425494230/stock-input-stream/shardId-000000000001
+```
+
 ## Reference
 
 - [query with kda](https://aws.amazon.com/blogs/big-data/query-your-data-streams-interactively-using-kinesis-data-analytics-studio-and-python/)

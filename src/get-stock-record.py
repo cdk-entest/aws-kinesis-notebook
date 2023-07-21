@@ -7,7 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 # parameterse 
 REGION = "ap-southeast-1"
 STREAM_NAME = "stock-input-stream"
-NUM_CONSUMER = 10 
+NUM_CONSUMER = 5
 
 # kinesis client
 client = boto3.client("kinesis", region_name=REGION)
@@ -39,7 +39,7 @@ def get_records(max_records=10000):
         shard_iterator = response["NextShardIterator"]
         print(records)
         record_count += len(records)
-        # time.sleep(1)
+        time.sleep(1)
 
 
 # multiple consumer 

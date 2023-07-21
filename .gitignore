@@ -2,3 +2,5 @@
 kinesis-producer-library-examples-master
 test
 **.jar
+.vscode
+**.target 

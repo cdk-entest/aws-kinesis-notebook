@@ -13,6 +13,9 @@ date: 17/07/2023
 - Create two simple queries, which means two Flink job
 - Then error happen
 
+![hehe](https://github.com/cdk-entest/aws-kinesis-notebook/assets/20411077/240bffc7-d98e-4354-bde4-7ce9e845f7b7)
+
+
 ## Producer
 
 - 1 Kinesis Data Stream, on-demand
@@ -109,3 +112,6 @@ Happen when two Flink jobs running on the same Data Stream. If only one query, o
 %flink.ssql(type=update)
 SELECT * FROM stock_table;
 ```
+<img width="913" alt="Screenshot 2023-07-21 at 08 56 41" src="https://github.com/cdk-entest/aws-kinesis-notebook/assets/20411077/17b5e7ee-5f8a-49fb-9ac4-400e3891ba65">
+
+

@@ -15,6 +15,9 @@ This [GitHub](https://github.com/cdk-entest/aws-kinesis-notebook/tree/master) sh
 - develop and deploy kda app
 - some key concepts of data streaming with flink
 
+![kinesis-analytic-demo-1](https://github.com/cdk-entest/aws-kinesis-notebook/assets/20411077/7cbd1c22-64be-4531-ba96-0068c5ea23b5)
+
+
 ## Kinesis CLI
 
 aws kinesis get-shard-iterator --shard-id shardId-000000000000 --shard-iterator-type TRIM_HORIZON
@@ -448,6 +451,11 @@ Then we got the below error ProvisionedThroughputExceededException
 ```
 An error occurred (ProvisionedThroughputExceededException) when calling the GetRecords operation (reached max retries: 4): Rate exceeded for Shard - 902425494230/stock-input-stream/shardId-000000000001
 ```
+
+## Join Stream 
+
+![kinesis-analytic-demo](https://github.com/cdk-entest/aws-kinesis-notebook/assets/20411077/ee158a2d-c5df-4fbc-98b3-eb57f191f160)
+
 
 ## Reference
 

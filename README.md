@@ -17,7 +17,6 @@ This [GitHub](https://github.com/cdk-entest/aws-kinesis-notebook/tree/master) sh
 
 ![kinesis-analytic-demo-1](https://github.com/cdk-entest/aws-kinesis-notebook/assets/20411077/7cbd1c22-64be-4531-ba96-0068c5ea23b5)
 
-
 ## Kinesis CLI
 
 aws kinesis get-shard-iterator --shard-id shardId-000000000000 --shard-iterator-type TRIM_HORIZON
@@ -68,6 +67,64 @@ Activate environment
 
 ```bash
 conda activate my-new-environment
+```
+
+## Shard Limit
+
+The read limit 5 transactions per seconds
+
+- [Kinesis max shard reads/sec and multiple consumers](https://stackoverflow.com/questions/45558658/what-does-a-limit-of-5-transactions-per-second-per-account-per-open-shard-for-ge)
+- [idleTimeBetweenReadsInMillis](https://stackoverflow.com/questions/44136758/kinesis-max-shard-reads-sec-and-multiple-consumers/44141248#44141248)
+- [idleTimeBetweenReadsInMillis GitHub](https://github.com/awslabs/amazon-kinesis-client/blob/0a91e6faa5a30757eda13e05a2efaf37f8d13379/src/main/java/com/amazonaws/services/kinesis/clientlibrary/lib/worker/KinesisClientLibConfiguration.java#L57)
+
+```py
+import boto3
+import os
+from multiprocessing import Process
+
+# parameterse
+REGION = "ap-southeast-1"
+STREAM_NAME = "stock-input-stream"
+NUM_CONSUMER = 10
+
+# kinesis client
+client = boto3.client("kinesis", region_name=REGION)
+
+# get records
+def get_records(max_records=10000):
+    """
+    get records from a stream
+    """
+    response = client.get_shard_iterator(
+        StreamName = STREAM_NAME,
+        ShardId="shardId-000000000001",
+        ShardIteratorType="LATEST"
+    )
+
+    # shard interator
+    shard_iterator = response["ShardIterator"]
+
+    # get records
+    record_count = 0
+    while record_count < max_records:
+        response = client.get_records(
+            ShardIterator = shard_iterator,
+            Limit=10
+        )
+        # record
+        records = response["Records"]
+        # next iterator
+        shard_iterator = response["NextShardIterator"]
+        #
+        print("id {0} records {1}".format(os.getpid(), records))
+        record_count += len(records)
+        # time.sleep(1)
+
+
+if __name__=="__main__":
+    # get_records()
+    for k in range(1, NUM_CONSUMER):
+            Process(target=get_records).start()
 ```
 
 ## Develop Notebook
@@ -452,10 +509,9 @@ Then we got the below error ProvisionedThroughputExceededException
 An error occurred (ProvisionedThroughputExceededException) when calling the GetRecords operation (reached max retries: 4): Rate exceeded for Shard - 902425494230/stock-input-stream/shardId-000000000001
 ```
 
-## Join Stream 
+## Join Stream
 
 ![kinesis-analytic-demo](https://github.com/cdk-entest/aws-kinesis-notebook/assets/20411077/ee158a2d-c5df-4fbc-98b3-eb57f191f160)
-
 
 ## Reference
 
@@ -482,3 +538,9 @@ An error occurred (ProvisionedThroughputExceededException) when calling the GetR
 - [flink event and watermak 1](https://www.youtube.com/watch?v=QVDJFZVHZ3c)
 
 - [flink event and watermak 2](https://www.youtube.com/watch?v=sdhwpUAjqaI&list=LL&index=3)
+
+- [Kinesis max shard reads/sec and multiple consumers](https://stackoverflow.com/questions/45558658/what-does-a-limit-of-5-transactions-per-second-per-account-per-open-shard-for-ge)
+
+- [idleTimeBetweenReadsInMillis](https://stackoverflow.com/questions/44136758/kinesis-max-shard-reads-sec-and-multiple-consumers/44141248#44141248)
+
+- [idleTimeBetweenReadsInMillis GitHub](https://github.com/awslabs/amazon-kinesis-client/blob/0a91e6faa5a30757eda13e05a2efaf37f8d13379/src/main/java/com/amazonaws/services/kinesis/clientlibrary/lib/worker/KinesisClientLibConfiguration.java#L57)

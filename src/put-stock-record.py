@@ -37,7 +37,9 @@ def generate(stream_name, kinesis_client):
         kinesis_client.put_record(
             StreamName=stream_name,
             Data=json.dumps(data),
-            PartitionKey="partitionkey")
+            # PartitionKey=data['ticker']
+            PartitionKey="partitionkey"
+            )
         time.sleep(1)
         i = i + 1
 

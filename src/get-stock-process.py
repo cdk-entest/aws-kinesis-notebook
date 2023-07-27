@@ -1,10 +1,13 @@
-# haimtran 21/07/2023
-# get record from a stream 
+# haimtran 20/07/2023
+# multiple consumers reading a shard 
+# to see the exceed read throughput error 
 import boto3
-import os 
-from multiprocessing import Process 
+import os
+from multiprocessing import Process
+from botocore.exceptions import ClientError
+import sys
 
-# parameterse 
+# parameterse
 REGION = "ap-southeast-1"
 STREAM_NAME = "stock-input-stream"
 NUM_CONSUMER = 10
@@ -23,25 +26,31 @@ def get_records(max_records=10000):
         ShardIteratorType="LATEST"
     )
 
-    # shard interator 
+    # shard interator
     shard_iterator = response["ShardIterator"]
 
     # get records
     record_count = 0
-    while record_count < max_records: 
-        response = client.get_records(
+    while record_count < max_records:
+        try:
+            response = client.get_records(
             ShardIterator = shard_iterator,
             Limit=10
-        )
-        # record
-        records = response["Records"]
-        # next iterator 
-        shard_iterator = response["NextShardIterator"]
-        # 
-        print("id {0} records {1}".format(os.getpid(), records))
-        record_count += len(records)
-        # time.sleep(1)
-
+            )
+            # record
+            records = response["Records"]
+            # next iterator
+            shard_iterator = response["NextShardIterator"]
+            # print to std out 
+            print("id {0} records {1}".format(os.getpid(), records))
+            # print to log file 
+            record_count += len(records)
+            # time.sleep(1)
+        except ClientError as error:
+            print("================================================ \n")
+            print(error)
+            print("================================================ \n")
+            os.system("pkill -f get-stock-process.py")
 
 if __name__=="__main__":
     # get_records()
